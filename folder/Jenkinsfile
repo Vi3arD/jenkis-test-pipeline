@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            yamlFile 'pod.yaml'
+            yamlFile 'folder/pod.yaml'
         }
     }
     options {
@@ -11,8 +11,9 @@ pipeline {
         stage('Create Terraform infrastructure') {
             steps {
                 container('terraform') {
+                    sh "pwd"
                     sh "ls -l"
-                    sh "cat config.txt"
+                    sh "cat folder/config.txt"
                     sh "terraform --version"
                 }
             }
