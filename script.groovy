@@ -1,4 +1,4 @@
-pipeline {
+def pipeline {
     agent {
         kubernetes {
             yamlFile 'pod.yaml'
