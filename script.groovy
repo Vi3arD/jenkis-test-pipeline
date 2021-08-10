@@ -1,4 +1,6 @@
-def pipeline {
+@Library(['github.com/shared-library']) _
+
+pipeline {
     agent {
         kubernetes {
             yamlFile 'pod.yaml'
