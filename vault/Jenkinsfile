@@ -19,7 +19,7 @@ pipeline {
                       [path: 'secret/club', engineVersion: 2, secretValues: [
                         [envVar: 'TEST_DATA', vaultKey: 'data']
                     ]
-                    ]) {
+                      ]]) {
                       sh "cd /vault"
                       sh "pwd"
                       sh "ls -l"
