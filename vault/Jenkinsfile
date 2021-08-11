@@ -31,7 +31,7 @@ pipeline {
                       sh "terraform --version"
 //                       sh "echo ${env.TEST_DATA}"
 //                       sh "echo ${TEST_DATA}"
-                      sh "echo ${TEST_DATA} > vault/data.txt"
+                      sh "echo $TEST_DATA > vault/data.txt"
                       sh "cat vault/data.txt"
                     }
                 }
