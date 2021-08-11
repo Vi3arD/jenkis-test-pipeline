@@ -16,7 +16,7 @@ pipeline {
                             vaultSecrets: 
                             [
                                 [
-                                    path: 'secret/club', engineVersion: 2, secretValues: 
+                                    path: 'secret/values', engineVersion: 2, secretValues: 
                                      [
                                         [envVar: 'TEST_DATA', vaultKey: 'data']
                                      ]
