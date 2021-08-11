@@ -1,0 +1,37 @@
+pipeline {
+    agent {
+        kubernetes {
+            yamlFile 'vault/pod.yaml'
+        }
+    }
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Create Terraform infrastructure') {
+            steps {
+                container('terraform') {
+                    withVault([configuration: 
+                    [vaultUrl: 'http://cc-vault:8200',  vaultCredentialId: 'vault_token', engineVersion: 2]
+                    , 
+                    vaultSecrets: 
+                    [
+                      [path: 'secret/club', engineVersion: 2, secretValues: [
+                        [envVar: 'TEST_DATA', vaultKey: 'data']
+                    ]
+                    ]) {
+                      sh "cd /vault"
+                      sh "pwd"
+                      sh "ls -l"
+                      sh "cat config.txt"
+                      sh "terraform --version"
+                      sh "echo ${env.TEST_DATA}"
+                      sh "echo ${TEST_DATA}"
+                      sh "echo ${TEST_DATA} > data.txt"
+                      sh "cat data.txt"
+                    }
+                }
+            }
+        }
+    }
+}
