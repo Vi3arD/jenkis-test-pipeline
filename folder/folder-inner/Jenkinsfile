@@ -12,6 +12,7 @@ pipeline {
             steps {
                 container('terraform') {
                   sh "pwd"
+                  sh "ls -l"
                   dir("folder-inner"){
                     sh "pwd"
                     sh "ls -l"
