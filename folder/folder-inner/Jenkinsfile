@@ -13,8 +13,7 @@ pipeline {
                 container('terraform') {
                   sh "pwd"
                   sh "ls -l"
-                  sh "ls -l folder-inner"
-                  dir("folder-inner"){
+                  dir("folder/folder-inner"){
                     sh "pwd"
                     sh "ls -l"
                     sh "cat config.txt"
