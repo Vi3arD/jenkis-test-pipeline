@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        kubernetes {
+            yamlFile 'pod.yaml'
+        }
+    }
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Create Terraform infrastructure') {
+            steps {
+                container('terraform') {
+                  sh "pwd"
+                  dir("inner-folder"){
+                    sh "pwd"
+                    sh "ls -l"
+                    sh "cat folder/config.txt"
+                    sh "terraform --version"
+                  }
+                }
+            }
+        }
+    }
+}
