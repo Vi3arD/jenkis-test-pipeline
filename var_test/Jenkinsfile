@@ -1,0 +1,95 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: terraform
+      image: hashicorp/terraform:1.0.6
+      command:
+        - sleep
+      args:
+        - "99d"
+            '''
+        }
+    }
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Destroy Terraform infrastructure') {
+            steps {
+                container('terraform') {
+                    withVault(
+                        [
+                            vaultSecrets:
+                            [
+                                [
+                                    path: 'cloud-control/TEST_WORKSPACE/profiles/e104e8cc-9fbb-45cc-9417-5b700bb928b1', engineVersion: 1, secretValues:
+                                      [
+                                        [envVar: 'CALLBACK_URL_CODED', vaultKey: 'CALLBACK_URL_CODED']
+                                      ]
+                                ]
+                            ]
+                        ]
+                  ) {
+                        script {
+                              CALLBACK_URL0 = sh(
+                                    script: 'echo ${CALLBACK_URL_CODED}',
+                                    returnStdout: true
+                            ).trim()
+                            
+                            CALLBACK_URL = '${CALLBACK_URL_CODED}'
+                            CALLBACK_URL1 = "${CALLBACK_URL_CODED}"
+                            CALLBACK_URL2 = "${env.CALLBACK_URL_CODED}"
+                            
+                              sh("echo ${CALLBACK_URL0}")
+                             sh("echo ${CALLBACK_URL}")
+                              sh("echo ${CALLBACK_URL1}")
+                               sh("echo ${CALLBACK_URL2}")
+                        }
+
+        
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        failure {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        aborted {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+    }
+}
