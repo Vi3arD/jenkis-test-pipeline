@@ -83,6 +83,7 @@ spec:
         failure {
             script {
                 try {
+                    println('Hello from a Job DSL script!')
                     def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
 
                     return response.status == "200"
