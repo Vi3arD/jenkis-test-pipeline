@@ -1,0 +1,136 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: terraform
+      image: hashicorp/terraform:1.0.6
+      command:
+        - sleep
+      args:
+        - "99d"
+            '''
+        }
+    }
+    options {
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Destroy Terraform infrastructure') {
+            steps {
+                container('terraform') {
+                    withVault(
+                        [
+                            vaultSecrets:
+                            [
+                                [
+                                    path: 'cloud-control/TEST_WORKSPACE/profiles/e104e8cc-9fbb-45cc-9417-5b700bb928b1', engineVersion: 1, secretValues:
+                                      [
+                                        [envVar: 'CALLBACK_URL_CODED', vaultKey: 'CALLBACK_URL_CODED']
+                                      ]
+                                ]
+                            ]
+                        ]
+                  ) {
+                        script {
+                              CALLBACK_URL0 = sh(
+                                    script: 'echo ${CALLBACK_URL_CODED}',
+                                    returnStdout: true
+                            ).trim()
+                            
+                            CALLBACK_URL = '${CALLBACK_URL_CODED}'
+                            CALLBACK_URL1 = "${CALLBACK_URL_CODED}"
+                            CALLBACK_URL2 = '$CALLBACK_URL_CODED'
+                            
+                            sh("echo ${CALLBACK_URL0}")
+                            sh("echo ${CALLBACK_URL}")
+                            sh("echo ${CALLBACK_URL1}")
+                            sh("echo ${CALLBACK_URL2}")
+                            
+//                             def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success", validResponseCodes: '200'
+
+                        }
+
+        
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script {
+                try {
+                      println("Hello from a Job DSL script! ---- ${CALLBACK_URL0}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL1}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL2}")
+                    
+                      def response111 = httpRequest "${CALLBACK_URL0}"
+        println("Status: "+response111.status)
+        println("Content: "+response111.content)
+                        println("------------- ")
+                    
+                    
+                             def response222 = httpRequest "${CALLBACK_URL}"
+        println("Status: "+response222.status)
+        println("Content: "+response222.content)
+                    println("------------- ")
+                    
+                                   def response333 = httpRequest "${CALLBACK_URL1}"
+        println("Status: "+response333.status)
+        println("Content: "+response333.content)
+                    println("------------- ")
+                    
+                                     def response444 = httpRequest "${CALLBACK_URL2}"
+        println("Status: "+response444.status)
+        println("Content: "+response444.content)
+                    println("------------- ")
+                    
+
+                    def response0 = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL0}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                     def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+                     def response1 = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL1}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+                     def response2 = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL2}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+                    
+                     println(response.status)
+                    
+                    return response.status == "200"
+                } catch (err) {
+                     println("-------4444324353534535353------ ")
+                    return false
+                }
+            }
+        }
+       
+
+        
+        failure {
+            script {
+                try {
+                    println('Hello from a Job DSL script!')
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        aborted {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+    }
+}
