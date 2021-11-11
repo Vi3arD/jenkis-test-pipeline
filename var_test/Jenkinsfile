@@ -45,10 +45,13 @@ spec:
                             CALLBACK_URL1 = "${CALLBACK_URL_CODED}"
                             CALLBACK_URL2 = "${env.CALLBACK_URL_CODED}"
                             
-                              sh("echo ${CALLBACK_URL0}")
-                             sh("echo ${CALLBACK_URL}")
-                              sh("echo ${CALLBACK_URL1}")
-                               sh("echo ${CALLBACK_URL2}")
+                            sh("echo ${CALLBACK_URL0}")
+                            sh("echo ${CALLBACK_URL}")
+                            sh("echo ${CALLBACK_URL1}")
+                            sh("echo ${CALLBACK_URL2}")
+                            
+                            def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
                         }
 
         
@@ -61,6 +64,18 @@ spec:
         success {
             script {
                 try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL0}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        
+                success {
+            script {
+                try {
                     def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
 
                     return response.status == "200"
@@ -69,6 +84,33 @@ spec:
                 }
             }
         }
+        
+                success {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL1}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        
+                success {
+            script {
+                try {
+                    def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL2}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
+
+                    return response.status == "200"
+                } catch (err) {
+                    return false
+                }
+            }
+        }
+        
+
+        
         failure {
             script {
                 try {
