@@ -69,6 +69,10 @@ spec:
                      println("Hello from a Job DSL script! ---- ${CALLBACK_URL1}")
                      println("Hello from a Job DSL script! ---- ${CALLBACK_URL2}")
                     
+                      def response111 = httpRequest '${CALLBACK_URL0}'
+        println("Status: "+response111.status)
+        println("Content: "+response111.content)
+                    
 
                     def response0 = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL0}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
 
