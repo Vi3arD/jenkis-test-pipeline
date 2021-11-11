@@ -64,9 +64,12 @@ spec:
         success {
             script {
                 try {
-                      println('Hello from a Job DSL script!')
-                      println('Hello from a Job DSL script!')
-                      println('Hello from a Job DSL script!')
+                      println("Hello from a Job DSL script! ---- ${CALLBACK_URL0}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL1}")
+                     println("Hello from a Job DSL script! ---- ${CALLBACK_URL2}")
+                    
+
                     def response0 = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL0}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
 
                      def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', url: "${CALLBACK_URL}/rest/jenkins/success?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
