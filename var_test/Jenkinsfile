@@ -43,7 +43,7 @@ spec:
                             
                             CALLBACK_URL = '${CALLBACK_URL_CODED}'
                             CALLBACK_URL1 = "${CALLBACK_URL_CODED}"
-                            CALLBACK_URL2 = "${env.CALLBACK_URL_CODED}"
+                            CALLBACK_URL2 = '$CALLBACK_URL_CODED'
                             
                             sh("echo ${CALLBACK_URL0}")
                             sh("echo ${CALLBACK_URL}")
