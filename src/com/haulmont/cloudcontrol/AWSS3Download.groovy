@@ -1,4 +1,4 @@
-package src.com.haulmont.cloudcontrol
+package com.haulmont.cloudcontrol
 
 class AWSS3Download implements Action {
 

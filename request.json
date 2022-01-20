@@ -15,19 +15,6 @@
       "delete": {
 
       }
-    },
-
-    {
-      "name": "download",
-      "compensate": "null",
-      "order": "0",
-      "function": "downloadFromS3",
-      "parameters": [
-        {
-          "name": "bucketName",
-          "value": "sources"
-        }
-      ]
     }
 
   ]
