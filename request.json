@@ -1,0 +1,34 @@
+{
+  "env": [
+    {
+      "bucketName": "cc-m-576576fhg"
+    }
+  ],
+  "actions": [
+
+    {
+      "name": "download configurations",
+      "executor": "AWSS3Download",
+      "create": {
+
+      },
+      "delete": {
+
+      }
+    },
+
+    {
+      "name": "download",
+      "compensate": "null",
+      "order": "0",
+      "function": "downloadFromS3",
+      "parameters": [
+        {
+          "name": "bucketName",
+          "value": "sources"
+        }
+      ]
+    }
+
+  ]
+}

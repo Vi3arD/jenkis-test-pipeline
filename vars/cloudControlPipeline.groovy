@@ -1,9 +1,13 @@
 #!/usr/bin/env groovy
+package vars
 
-def call(String name = 'human') {
-    container('terraform') {
-        echo "Hello, ${name}!"
-        sh("terraform -version")
-        terraform -version
-    }
+import groovy.json.JsonSlurper
+import src.com.haulmont.cloudcontrol.AWSS3Download
+import src.com.haulmont.cloudcontrol.GlobalVars
+
+def call(String request) {
+    def jsonSlurper = new JsonSlurper()
+    def structure = jsonSlurper.parseText(request)
+    AWSS3Download awss3Download = new AWSS3Download();
+    awss3Download.action(structure[GlobalVars.ENV])
 }
