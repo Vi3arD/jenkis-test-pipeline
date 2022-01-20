@@ -2,6 +2,6 @@
 
 def call(String name = 'human') {
     container('terraform') {
-        echo "Hello, ${name}."
+        echo "Hello, ${name}!"
     }
 }
