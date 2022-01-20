@@ -1,1 +1,1 @@
-# jenkis-test-pipeline
+# jenkins-shared-library
