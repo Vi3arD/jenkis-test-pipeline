@@ -2,9 +2,9 @@ package com.haulmont.cloudcontrol
 
 interface Action {
 
-    void action(parameters)
+    void action(script, parameters)
 
-    void rollback(parameters)
+    void rollback(script, parameters)
 
     String getContainerName()
 }
