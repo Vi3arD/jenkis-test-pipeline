@@ -13,6 +13,7 @@ def call(String request) {
 
     Reflections reflections = new Reflections("com.haulmont.cloudcontrol");
     Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class);
+    echo classes.size().toString()
     echo classes.toListString()
     echo classes.toString()
 
