@@ -9,7 +9,7 @@ import com.haulmont.cloudcontrol.GlobalVars
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    ParserUtils.toEnv(this, structure[GlobalVars.ENV] as Map)
+    ParserUtils.toEnv(this, structure[GlobalVars.ENV])
 
     AWSS3Download awss3Download = new AWSS3Download()
     Terraform terraform = new Terraform()

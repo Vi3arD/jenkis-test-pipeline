@@ -2,7 +2,7 @@ package com.haulmont.cloudcontrol
 
 class ParserUtils {
 
-    public static void toEnv(def script, Map parameters) {
+    public static void toEnv(def script, def parameters) {
         script.sh "echo ${parameters}"
         parameters.each {
             entry ->
