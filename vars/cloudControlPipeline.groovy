@@ -11,7 +11,9 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    def clz = Class.forName("AWSS3Download", true, this.getClassLoader())
+    Object lib = load 'src/com/haulmont/cloudcontrol/AWSS3Download.groovy'
+
+    def clz = Class.forName("com.haulmont.cloudcontrol.AWSS3Download", true, this.getClassLoader())
     container(clz.getContainerName()) {
         clz.action(this, structure[GlobalVars.ENV])
     }
