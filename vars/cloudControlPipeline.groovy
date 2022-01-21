@@ -11,8 +11,8 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    Reflections reflections = new Reflections("src.com.haulmont.*");
-    Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class);
+    Reflections reflections = new Reflections()
+    Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class)
 
     echo classes.size().toString()
     echo classes.toListString()
