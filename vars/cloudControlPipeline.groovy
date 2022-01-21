@@ -11,7 +11,7 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    def clz = Class.forName("AWSS3Download")
+    def clz = Class.forName("com.haulmont.cloudcontrol.AWSS3Download")
     container(clz.getContainerName()) {
         clz.action(this, structure[GlobalVars.ENV])
     }
