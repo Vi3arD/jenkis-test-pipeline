@@ -11,10 +11,10 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    def clz = Class.forName("com.haulmont.cloudcontrol.AWSS3Download")
-    container(clz.getContainerName()) {
-        clz.action(this, structure[GlobalVars.ENV])
-    }
+//    def clz = Class.forName("com.haulmont.cloudcontrol.AWSS3Download")
+//    container(clz.getContainerName()) {
+//        clz.action(this, structure[GlobalVars.ENV])
+//    }
 
 
 //    Reflections reflections = new Reflections()
@@ -24,11 +24,11 @@ def call(String request) {
 //    echo classes.toListString()
 //    echo classes.toString()
 
-//    AWSS3Download awss3Download = new AWSS3Download()
-//    Terraform terraform = new Terraform()
-//    container(awss3Download.getContainerName()) {
-//        awss3Download.action(this, structure[GlobalVars.ENV])
-//    }
+    AWSS3Download awss3Download = new AWSS3Download()
+    Terraform terraform = new Terraform()
+    container(awss3Download.getContainerName()) {
+        awss3Download.action(this, structure[GlobalVars.ENV])
+    }
 //    container(terraform.getContainerName()) {
 //        terraform.action(this, structure[GlobalVars.ENV])
 //    }
