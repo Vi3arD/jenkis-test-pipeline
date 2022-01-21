@@ -6,14 +6,18 @@ import com.haulmont.cloudcontrol.Terraform
 
 class ClassKeeper {
 
-    private def beans = [:]
+    private static Map beans = [:]
 
-    public def getBeans() {
+    static Map getBeans() {
+        init()
         return beans
     }
 
-    private void init() {
-        beans.put("AWSS3Download", new AWSS3Download())
-        beans.put("Terraform", new Terraform())
+    private static void init() {
+        if (beans.size() == 0) {
+            beans.put("AWSS3Download", new AWSS3Download())
+            beans.put("Terraform", new Terraform())
+        }
     }
+
 }

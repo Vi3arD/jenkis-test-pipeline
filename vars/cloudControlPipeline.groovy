@@ -2,18 +2,27 @@
 package vars
 
 import com.haulmont.cloudcontrol.AWSS3Download
+import com.haulmont.cloudcontrol.ClassKeeper
 import com.haulmont.cloudcontrol.ParserUtils
 import com.haulmont.cloudcontrol.Terraform
 import com.haulmont.cloudcontrol.GlobalVars
 
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
-
     ParserUtils.toEnv(this, structure[GlobalVars.ENV])
 
-    AWSS3Download awss3Download = new AWSS3Download()
-    Terraform terraform = new Terraform()
-    container(awss3Download.getContainerName()) {
-        awss3Download.action(this, structure[GlobalVars.ENV])
+    int currentStep
+    Map beans = ClassKeeper.getBeans()
+
+    try {
+        for (currentStep = 0; currentStep < structure[GlobalVars.ACTIONS].size(); currentStep++) {
+            def executor = beans.get(structure[GlobalVars.ACTIONS][i][GlobalVars.EXECUTOR])
+            container(executor.getContainerName()) {
+                executor.action(this)
+            }
+        }
+    } catch (Exception e) {
+
     }
+
 }

@@ -4,6 +4,8 @@ class GlobalVars {
 
     static String ENV = "env"
     static String ACTIONS = "actions"
+    static String NAME = "name"
+    static String EXECUTOR = "executor"
 
     static String AWS_REGION = "AWS_REGION"
     static String AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
