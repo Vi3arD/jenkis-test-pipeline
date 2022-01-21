@@ -11,12 +11,18 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    Reflections reflections = new Reflections()
-    Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class)
+    def clz = Class.forName("AWSS3Download")
+    container(clz.getContainerName()) {
+        clz.action(this, structure[GlobalVars.ENV])
+    }
 
-    echo classes.size().toString()
-    echo classes.toListString()
-    echo classes.toString()
+
+//    Reflections reflections = new Reflections()
+//    Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class)
+//
+//    echo classes.size().toString()
+//    echo classes.toListString()
+//    echo classes.toString()
 
 //    AWSS3Download awss3Download = new AWSS3Download()
 //    Terraform terraform = new Terraform()
