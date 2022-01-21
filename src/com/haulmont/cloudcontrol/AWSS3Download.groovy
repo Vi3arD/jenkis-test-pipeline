@@ -1,6 +1,6 @@
 package com.haulmont.cloudcontrol
 
-class AWSS3Download implements Action {
+class AWSS3Download implements Action, Serializable {
 
     private static String CONTAINER = 'aws'
 

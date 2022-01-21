@@ -1,6 +1,6 @@
 package com.haulmont.cloudcontrol
 
-class Terraform implements Action {
+class Terraform implements Action, Serializable {
 
     private static String CONTAINER = 'terraform'
 
