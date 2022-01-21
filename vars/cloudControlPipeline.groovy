@@ -13,7 +13,8 @@ def call(String request) {
 
     Reflections reflections = new Reflections("com.haulmont.cloudcontrol");
     Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class);
-    echo classes
+    echo classes.toListString()
+    echo classes.toString()
 
 //    AWSS3Download awss3Download = new AWSS3Download()
 //    Terraform terraform = new Terraform()
