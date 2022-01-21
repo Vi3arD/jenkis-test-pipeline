@@ -14,15 +14,15 @@ def call(String request) {
     int currentStep
     Map beans = ClassKeeper.getBeans()
 
-    try {
+//    try {
         for (currentStep = 0; currentStep < structure[GlobalVars.ACTIONS].size(); currentStep++) {
-            def executor = beans.get(structure[GlobalVars.ACTIONS][i][GlobalVars.EXECUTOR])
+            def executor = beans.get(structure[GlobalVars.ACTIONS][currentStep][GlobalVars.EXECUTOR])
             container(executor.getContainerName()) {
                 executor.action(this)
             }
         }
-    } catch (Exception e) {
-        script.sh "error -> ${e}"
+//    } catch (Exception e) {
+//        script.sh "error -> ${e}"
     }
 
 }
