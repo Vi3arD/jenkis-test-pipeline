@@ -6,8 +6,9 @@ class AWSS3Download implements Action {
 
     @Override
     void action(parameters) {
-        sh("aws s3 cp s3://" + parameters[GlobalVars.BUCKET_NAME] + "/terraform /data --recursive")
-        sh('cd /data && ls -lsa')
+//        sh("aws s3 cp s3://" + parameters[GlobalVars.BUCKET_NAME] + "/terraform /data --recursive")
+//        sh('cd /data && ls -lsa')
+        sh('echo pwd')
     }
 
     @Override
