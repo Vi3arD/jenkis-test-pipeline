@@ -9,7 +9,7 @@ class AWSS3Download implements Action, Serializable {
     @Override
     void action(script, parameters) {
 
-        def clz = Class.forName("Terraform")
+        def clz = Class.forName("com.haulmont.cloudcontrol.Terraform")
         container(clz.getContainerName()) {
             clz.action(this, structure[GlobalVars.ENV])
         }
