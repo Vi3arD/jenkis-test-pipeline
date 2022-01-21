@@ -6,7 +6,8 @@ class Terraform implements Action {
 
     @Override
     void action(script, parameters) {
-        script.sh "echo AWS_REGION"
+        script.sh "printenv"
+        script.sh "echo ${script.env.AWS_REGION}"
     }
 
     @Override
