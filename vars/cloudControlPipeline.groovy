@@ -22,7 +22,7 @@ def call(String request) {
             }
         }
     } catch (Exception e) {
-
+        script.sh "error -> ${e}"
     }
 
 }
