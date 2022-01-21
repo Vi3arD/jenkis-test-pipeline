@@ -11,7 +11,7 @@ import org.reflections.*
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
-    Reflections reflections = new Reflections("com.haulmont.cloudcontrol");
+    Reflections reflections = new Reflections("com.haulmont.*");
 
     Set<Class<?>> classes = reflections.get(SubTypes.of(Action.class).asClass());
 
