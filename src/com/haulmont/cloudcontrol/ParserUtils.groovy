@@ -4,7 +4,7 @@ class ParserUtils {
 
     public static void toEnv(def script, Map parameters) {
         parameters.each {
-            script.env["${entry.key}"] = entry.value
+            entry -> script.env["${entry.key}"] = entry.value
         }
     }
 
