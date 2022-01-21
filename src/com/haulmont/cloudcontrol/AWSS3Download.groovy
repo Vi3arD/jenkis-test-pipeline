@@ -9,10 +9,10 @@ class AWSS3Download implements Action, Serializable {
     @Override
     void action(script, parameters) {
 
-        def clz = Class.forName("Terraform", true, this.class.classLoader)
-        container(clz.getContainerName()) {
-            clz.action(this, structure[GlobalVars.ENV])
-        }
+//        def clz = Class.forName("Terraform", true, this.class.classLoader)
+//        container(clz.getContainerName()) {
+//            clz.action(this, structure[GlobalVars.ENV])
+//        }
 
         script.env.AWS_REGION = parameters[GlobalVars.AWS_REGION][0]
         script.env.AWS_ACCESS_KEY_ID = parameters[GlobalVars.AWS_ACCESS_KEY_ID][0]
