@@ -5,14 +5,16 @@ import groovy.json.JsonSlurperClassic
 import com.haulmont.cloudcontrol.AWSS3Download
 import com.haulmont.cloudcontrol.Terraform
 import com.haulmont.cloudcontrol.GlobalVars
-@Grab( 'org.reflections:reflections:0.9.9-RC1' )
+@Grab( 'org.reflections:reflections:0.10.2' )
 import org.reflections.*
 
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
 
     Reflections reflections = new Reflections("com.haulmont.cloudcontrol");
-    Set<Class<? extends Action>> classes = reflections.getSubTypesOf(Action.class);
+
+    Set<Class<?>> classes = reflections.get(SubTypes.of(Action.class).asClass());
+
     echo classes.size().toString()
     echo classes.toListString()
     echo classes.toString()
