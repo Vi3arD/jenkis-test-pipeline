@@ -10,5 +10,7 @@ def call(String request) {
     def structure = jsonSlurper.parseText(request)
     AWSS3Download awss3Download = new AWSS3Download()
 //    echo structure[GlobalVars.ENV][GlobalVars.BUCKET_NAME]
-    awss3Download.action(structure.env)
+    container(awss3Download.getContainerName()) {
+        awss3Download.action(structure.env)
+    }
 }

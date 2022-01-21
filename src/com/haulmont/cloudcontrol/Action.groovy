@@ -6,4 +6,5 @@ interface Action {
 
     void rollback(parameters)
 
+    String getContainerName()
 }
