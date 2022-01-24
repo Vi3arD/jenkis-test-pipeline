@@ -6,12 +6,12 @@ class Ansible implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.sh "ANSIBLE ACTION"
+        script.sh "echo ANSIBLE ACTION"
     }
 
     @Override
     void rollback(def script) {
-        script.sh "ANSIBLEw ROLLBACK"
+        script.sh "echo ANSIBLE ROLLBACK"
     }
 
     @Override

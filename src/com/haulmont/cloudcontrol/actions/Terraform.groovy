@@ -6,14 +6,14 @@ class Terraform implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.sh "TERRAFORM ACTION"
+        script.sh "echo TERRAFORM ACTION"
         script.sh "printenv"
         throw new RuntimeException("i'am error")
     }
 
     @Override
     void rollback(def script) {
-        script.sh "TERRAFORM ROLLBACK"
+        script.sh "echo TERRAFORM ROLLBACK"
     }
 
     @Override

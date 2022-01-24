@@ -14,7 +14,7 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void rollback(def script) {
-        script.sh "AWSS3Download rollback"
+        script.sh "echo AWSS3Download rollback"
     }
 
     @Override
