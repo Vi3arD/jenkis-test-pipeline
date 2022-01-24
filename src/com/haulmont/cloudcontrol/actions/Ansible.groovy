@@ -1,4 +1,4 @@
-package src.com.haulmont.cloudcontrol.actions
+package com.haulmont.cloudcontrol.actions
 
 class Ansible implements Action, Serializable {
 
