@@ -6,7 +6,6 @@ import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
-
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
