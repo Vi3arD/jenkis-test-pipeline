@@ -49,12 +49,6 @@ spec:
     - name: data
       emptyDir: {}'''
 
-    agent {
-        kubernetes {
-            yaml podTemplate
-        }
-    }
-
     if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
         try {
             for (currentStep = 0; currentStep < size; currentStep++) {

@@ -10,6 +10,11 @@ pipeline {
     }
     stages {
         stage('main') {
+            agent {
+                kubernetes {
+                    yaml env.POD
+                }
+            }
             steps {
 
                 cloudControlPipeline(env.REQUEST)
