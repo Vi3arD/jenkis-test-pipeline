@@ -4,17 +4,16 @@ library identifier: 'jenkis-test-pipeline@main', retriever: modernSCM(
    credentialsId: 'jenkins_user'])
 
 pipeline {
-    agent none
+    agent {
+        kubernetes {
+              yaml libraryResource('pod.yaml')
+        }
+    }
     options {
         ansiColor('xterm')
     }
     stages {
         stage('main') {
-            agent {
-                kubernetes {
-                    yaml env.POD
-                }
-            }
             steps {
 
                 cloudControlPipeline(env.REQUEST)
