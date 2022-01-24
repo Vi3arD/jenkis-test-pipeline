@@ -4,28 +4,7 @@ library identifier: 'jenkis-test-pipeline@main', retriever: modernSCM(
    credentialsId: 'jenkins_user'])
 
 pipeline {
-    agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: aws
-      image: amazon/aws-cli:2.4.12
-      command:
-        - sleep
-      args:
-        - "99d"
-      volumeMounts:
-      - name: data
-        mountPath: /data
-  volumes:
-  - name: data
-    emptyDir: {}
-            '''
-        }
-    }
+    agent none
     options {
         ansiColor('xterm')
     }

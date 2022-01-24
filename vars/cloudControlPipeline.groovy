@@ -12,32 +12,66 @@ def call(String request) {
     String flowStatus = "success"
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
-    podTemplate(containers: [
-            containerTemplate(
-                    name: 'terraform',
-                    image: 'hashicorp/terraform:1.0.6'
-            )
-    ]) {
 
-        if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
-            try {
-                for (currentStep = 0; currentStep < size; currentStep++) {
-                    Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
-                }
-            } catch (Exception e) {
-                for (currentStep; currentStep >= 0; currentStep--) {
-                    Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
-                }
-                flowStatus = "failed"
-                echo "error -> ${e}"
-            }
-        } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
-            for (currentStep = size - 1; currentStep >= 0; currentStep--) {
-                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
-            }
+    def podTemplate = '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: terraform
+      image: hashicorp/terraform:1.0.6
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+    - name: ansible
+      image: ansible/ansible-runner:1.4.7
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+    - name: aws
+      image: amazon/aws-cli:2.4.12
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  volumes:
+    - name: data
+      emptyDir: {}'''
+
+    agent {
+        kubernetes {
+            yaml podTemplate
         }
-
-        Notifier.send(this, flowStatus)
     }
 
+    if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
+        try {
+            for (currentStep = 0; currentStep < size; currentStep++) {
+                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+            }
+        } catch (Exception e) {
+            for (currentStep; currentStep >= 0; currentStep--) {
+                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+            }
+            flowStatus = "failed"
+            echo "error -> ${e}"
+        }
+    } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
+        for (currentStep = size - 1; currentStep >= 0; currentStep--) {
+            Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+        }
+    }
+
+    Notifier.send(this, flowStatus)
 }
