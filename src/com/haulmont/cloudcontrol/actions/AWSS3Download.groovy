@@ -1,4 +1,4 @@
-package com.haulmont.cloudcontrol
+package com.haulmont.cloudcontrol.actions
 
 import com.haulmont.cloudcontrol.GlobalVars
 
@@ -14,6 +14,7 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void rollback(def script) {
+        script.sh "AWSS3Download rollback"
     }
 
     @Override

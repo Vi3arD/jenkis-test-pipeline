@@ -1,8 +1,6 @@
 package com.haulmont.cloudcontrol
 
-import com.haulmont.cloudcontrol.AWSS3Download
-import com.haulmont.cloudcontrol.Terraform
-
+import com.haulmont.cloudcontrol.actions.AWSS3Download
 
 class ClassKeeper {
 

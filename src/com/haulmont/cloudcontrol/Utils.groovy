@@ -1,9 +1,9 @@
 package com.haulmont.cloudcontrol
 
-class ParserUtils {
+class Utils {
 
     static void toEnv(def script, def parameters) {
-        parameters[0].each {
+        parameters.each {
             entry -> script.env["${entry.key}"] = entry.value
         }
     }

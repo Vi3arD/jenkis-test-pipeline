@@ -2,10 +2,14 @@ package com.haulmont.cloudcontrol
 
 class GlobalVars {
 
+    static String TYPE = "type"
     static String ENV = "env"
     static String ACTIONS = "actions"
     static String NAME = "name"
     static String EXECUTOR = "executor"
+
+    static String INSTALL = "install"
+    static String DESTROY = "destroy"
 
     static String AWS_REGION = "AWS_REGION"
     static String AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"

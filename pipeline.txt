@@ -20,6 +20,15 @@ spec:
       volumeMounts:
       - name: data
         mountPath: /data
+    - name: ansible
+      image: ansible/ansible-runner:1.4.7
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+      - name: data
+        mountPath: /data
     - name: aws
       image: amazon/aws-cli:2.4.12
       command:

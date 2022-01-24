@@ -1,4 +1,4 @@
-package com.haulmont.cloudcontrol
+package com.haulmont.cloudcontrol.actions
 
 interface Action {
 

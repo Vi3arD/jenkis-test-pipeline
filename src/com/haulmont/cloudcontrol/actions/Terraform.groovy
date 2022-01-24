@@ -1,4 +1,4 @@
-package com.haulmont.cloudcontrol
+package com.haulmont.cloudcontrol.actions
 
 class Terraform implements Action, Serializable {
 
@@ -6,13 +6,14 @@ class Terraform implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.sh "ALIVE!!!!!!!!!!"
-        script.sh "echo ${script.env.AWS_REGION}"
-        script.sh "printenv ${script.env.AWS_REGION}"
+        script.sh "TERRAFORM ACTION"
+        script.sh "printenv"
+        throw new RuntimeException("i'am error")
     }
 
     @Override
     void rollback(def script) {
+        script.sh "TERRAFORM ROLLBACK"
     }
 
     @Override
