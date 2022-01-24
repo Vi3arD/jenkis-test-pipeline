@@ -12,31 +12,12 @@ def call(String request) {
     String flowStatus = "success"
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
-
-    podTemplate(yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: terraform
-      image: hashicorp/terraform:1.0.6
-      command:
-        - sleep
-      args:
-        - "99d"
-      volumeMounts:
-      - name: data
-        mountPath: /data
-    - name: ansible
-      image: ansible/ansible-runner:1.4.7
-      command:
-        - sleep
-      args:
-        - "99d"
-      volumeMounts:
-      - name: data
-        mountPath: /data
-''')
+    podTemplate(containers: [
+            containerTemplate(
+                    name: 'terraform',
+                    image: 'hashicorp/terraform:1.0.6'
+            )
+    ])
 
     if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
         try {
