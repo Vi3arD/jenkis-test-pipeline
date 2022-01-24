@@ -9,7 +9,6 @@ class ClassKeeper {
     private static Map beans = [:]
 
     static Map getBeans() {
-        Class.forName("GlobalVars")
         init()
         return beans
     }

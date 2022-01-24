@@ -9,8 +9,6 @@ def call(String request) {
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
-    def clz = Class.forName("com.haulmont.cloudcontrol.Notifier")
-
     String flowStatus = "success"
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
