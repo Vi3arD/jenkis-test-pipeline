@@ -22,7 +22,7 @@ def call(String request) {
                 }
             }
         } catch (Exception e) {
-            for (currentStep; currentStep > 0; currentStep--) {
+            for (currentStep; currentStep >= 0; currentStep--) {
                 def executor = beans.get(structure[GlobalVars.ACTIONS][currentStep][GlobalVars.EXECUTOR])
                 container(executor.getContainerName()) {
                     executor.rollback(this)
@@ -31,7 +31,7 @@ def call(String request) {
             script.sh "error -> ${e}"
         }
     } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
-        for (currentStep = size; currentStep > 0; currentStep--) {
+        for (currentStep = size; currentStep >= 0; currentStep--) {
             def executor = beans.get(structure[GlobalVars.ACTIONS][currentStep][GlobalVars.EXECUTOR])
             container(executor.getContainerName()) {
                 executor.rollback(this)
