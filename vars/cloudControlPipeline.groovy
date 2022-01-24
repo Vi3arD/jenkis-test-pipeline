@@ -31,7 +31,7 @@ def call(String request) {
             echo "error -> ${e}"
         }
     } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
-        for (currentStep = size; currentStep >= 0; currentStep--) {
+        for (currentStep = size - 1; currentStep >= 0; currentStep--) {
             def executor = beans.get(structure[GlobalVars.ACTIONS][currentStep][GlobalVars.EXECUTOR])
             container(executor.getContainerName()) {
                 executor.rollback(this)
