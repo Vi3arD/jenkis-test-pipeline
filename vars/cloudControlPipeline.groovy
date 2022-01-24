@@ -16,7 +16,15 @@ def call(String request) {
     if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
         try {
             for (currentStep = 0; currentStep < size; currentStep++) {
-                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+
+
+                podTemplate(    [containerTemplate(name: 'aws', image: 'amazon/aws-cli:2.4.12', command: 'sleep', args: '99d')]) {
+
+                    node(POD_LABEL) {
+                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+                    }
+                }
+
             }
         } catch (Exception e) {
             for (currentStep; currentStep >= 0; currentStep--) {
