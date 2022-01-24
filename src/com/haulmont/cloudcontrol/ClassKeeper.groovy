@@ -1,6 +1,8 @@
 package com.haulmont.cloudcontrol
 
 import com.haulmont.cloudcontrol.actions.AWSS3Download
+import com.haulmont.cloudcontrol.actions.Terraform
+import com.haulmont.cloudcontrol.actions.Ansible
 
 class ClassKeeper {
 
@@ -15,6 +17,7 @@ class ClassKeeper {
         if (beans.size() == 0) {
             beans.put("AWSS3Download", new AWSS3Download())
             beans.put("Terraform", new Terraform())
+            beans.put("Ansible", new Ansible())
         }
     }
 
