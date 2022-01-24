@@ -6,6 +6,8 @@ import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
+    sh("echo ${env.POD} > /var/jenkins_home/workspace/1@libs/jenkis-test-pipeline/resources/file.yaml")
+
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
@@ -16,15 +18,7 @@ def call(String request) {
     if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
         try {
             for (currentStep = 0; currentStep < size; currentStep++) {
-
-
-                podTemplate(    [containerTemplate(name: 'aws', image: 'amazon/aws-cli:2.4.12', command: 'sleep', args: '99d')]) {
-
-                    node(POD_LABEL) {
-                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
-                    }
-                }
-
+                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
             }
         } catch (Exception e) {
             for (currentStep; currentStep >= 0; currentStep--) {
