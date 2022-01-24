@@ -7,7 +7,7 @@ import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
 
-    def newFile = new File("/resources/test.txt")
+    def newFile = new File("./resources/test.txt")
     newFile.createNewFile()
 
     def structure = readJSON text: request, returnPojo: true
