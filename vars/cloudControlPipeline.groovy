@@ -13,6 +13,31 @@ def call(String request) {
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
 
+    podTemplate(yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: terraform
+      image: hashicorp/terraform:1.0.6
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+      - name: data
+        mountPath: /data
+    - name: ansible
+      image: ansible/ansible-runner:1.4.7
+      command:
+        - sleep
+      args:
+        - "99d"
+      volumeMounts:
+      - name: data
+        mountPath: /data
+''')
+
     if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
         try {
             for (currentStep = 0; currentStep < size; currentStep++) {
