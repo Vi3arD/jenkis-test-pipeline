@@ -8,15 +8,8 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.container(CONTAINER) {
-            script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/terraform /data --recursive"
-            script.sh "cd /data && ls -lsa"
-            script.sh "echo AWSS3Download"
-            script.sh "echo AWSS3Download"
-            script.sh "echo AWSS3Download"
-            script.sh "echo AWSS3Download"
-            script.sh "echo AWSS3Download"
-        }
+        script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/terraform /data --recursive"
+        script.sh "cd /data && ls -lsa"
     }
 
     @Override
