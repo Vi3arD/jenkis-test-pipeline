@@ -17,26 +17,27 @@ def call(String request) {
                     name: 'terraform',
                     image: 'hashicorp/terraform:1.0.6'
             )
-    ])
+    ]) {
 
-    if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
-        try {
-            for (currentStep = 0; currentStep < size; currentStep++) {
-                Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+        if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
+            try {
+                for (currentStep = 0; currentStep < size; currentStep++) {
+                    Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+                }
+            } catch (Exception e) {
+                for (currentStep; currentStep >= 0; currentStep--) {
+                    Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+                }
+                flowStatus = "failed"
+                echo "error -> ${e}"
             }
-        } catch (Exception e) {
-            for (currentStep; currentStep >= 0; currentStep--) {
+        } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
+            for (currentStep = size - 1; currentStep >= 0; currentStep--) {
                 Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
             }
-            flowStatus = "failed"
-            echo "error -> ${e}"
         }
-    } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
-        for (currentStep = size - 1; currentStep >= 0; currentStep--) {
-            Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
-        }
-    }
 
-    Notifier.send(this, flowStatus)
+        Notifier.send(this, flowStatus)
+    }
 
 }
