@@ -28,7 +28,7 @@ def call(String request) {
                     executor.rollback(this)
                 }
             }
-            script.sh "error -> ${e}"
+            script.sh "echo error -> ${e}"
         }
     } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
         for (currentStep = size; currentStep >= 0; currentStep--) {
