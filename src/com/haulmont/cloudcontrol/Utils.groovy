@@ -1,10 +1,14 @@
 package com.haulmont.cloudcontrol
 
-import com.haulmont.cloudcontrol.ClassKeeper
 import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
 
 class Utils {
+
+    static def getActionInstanceByClassName(String name) {
+        def cls = Class.forName("com.haulmont.cloudcontrol.actions.${name}", true, Thread.currentThread().getContextClassLoader())
+        return cls.getDeclaredConstructor().newInstance()
+    }
 
     static void toEnv(def script, def parameters) {
         parameters.each {
@@ -14,17 +18,15 @@ class Utils {
 
     static ArrayList getContainers(def script, def actions) {
         def result = []
-        Map beans = ClassKeeper.getBeans()
         for (int i = 0; i < actions.size(); i++) {
-            def executor = beans.get(actions[i][GlobalVars.EXECUTOR])
+            def executor = getActionInstanceByClassName(actions[i][GlobalVars.EXECUTOR] as String)
             result.add(script.containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
         }
         return result
     }
 
     static void make(def script, def action, boolean isRollback = false) {
-        Map beans = ClassKeeper.getBeans()
-        def executor = beans.get(action[GlobalVars.EXECUTOR])
+        def executor = getActionInstanceByClassName(action[GlobalVars.EXECUTOR] as String)
         script.container(executor.getContainerName()) {
             if (isRollback) {
                 executor.rollback(script)
