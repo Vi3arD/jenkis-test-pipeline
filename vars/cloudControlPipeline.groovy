@@ -7,7 +7,7 @@ import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
     def cls = Class.forName("com.haulmont.cloudcontrol.actions.Ansible", true, Thread.currentThread().getContextClassLoader())
-    def ans = clazz.getDeclaredConstructor().newInstance()
+    def ans = cls.getDeclaredConstructor().newInstance()
     ans.rollback(this)
 
     def structure = readJSON text: request, returnPojo: true
