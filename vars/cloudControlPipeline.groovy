@@ -6,7 +6,10 @@ import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
-    def cls = Class.forName("com.haulmont.cloudcontrol.Notifier", true, Thread.currentThread().getContextClassLoader())
+    def cls = Class.forName("com.haulmont.cloudcontrol.actions.Ansible", true, Thread.currentThread().getContextClassLoader())
+    def ans = clazz.getDeclaredConstructor().newInstance()
+    ans.rollback(this)
+
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
@@ -15,7 +18,7 @@ def call(String request) {
     int size = structure[GlobalVars.ACTIONS].size()
 
     podTemplate(containers: Utils.getContainers(this, structure[GlobalVars.ACTIONS]),
-            volumes: [emptyDirVolume(name: 'shared', mountPath: '/shared')]
+            volumes: [emptyDirVolume(mountPath: '/shared')]
     ) {
         node(POD_LABEL) {
 
