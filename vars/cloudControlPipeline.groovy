@@ -6,6 +6,8 @@ import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
+    this.env["CLASSPATH"] = 'com.haulmont.cloudcontrol'
+    def cls = Class.forName("com.haulmont.cloudcontrol.Notifier")
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
