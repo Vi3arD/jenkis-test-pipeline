@@ -12,6 +12,15 @@ class Utils {
         }
     }
 
+    static ArrayList getContainers(def actions) {
+        def result = []
+        Map beans = ClassKeeper.getBeans()
+        for (int i = 0; i < actions.size(); i++) {
+            def executor = beans.get(actions[i][GlobalVars.EXECUTOR])
+            result.add(containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
+        }
+    }
+
     static void make(def script, def action, boolean isRollback = false) {
         Map beans = ClassKeeper.getBeans()
         def executor = beans.get(action[GlobalVars.EXECUTOR])

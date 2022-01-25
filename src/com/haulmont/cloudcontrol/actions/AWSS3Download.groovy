@@ -4,7 +4,8 @@ import com.haulmont.cloudcontrol.GlobalVars
 
 class AWSS3Download implements Action, Serializable {
 
-    private static String CONTAINER = 'aws'
+    private static String CONTAINER = 'aws-cli'
+    private static String IMAGE = 'amazon/aws-cli:2.4.12'
 
     @Override
     void action(def script) {
@@ -20,6 +21,11 @@ class AWSS3Download implements Action, Serializable {
     @Override
     String getContainerName() {
         return CONTAINER
+    }
+
+    @Override
+    String getImage() {
+        return IMAGE
     }
 
 }

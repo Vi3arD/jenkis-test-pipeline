@@ -3,6 +3,7 @@ package com.haulmont.cloudcontrol
 class Notifier {
 
     static void send(def script, String type, String description = "") {
+        script.sh('echo "send message"')
 //        def response = httpRequest consoleLogResponseBody: true,
 //                contentType: 'APPLICATION_JSON',
 //                httpMode: 'GET',

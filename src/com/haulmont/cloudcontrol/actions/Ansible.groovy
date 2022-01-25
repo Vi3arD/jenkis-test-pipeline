@@ -3,6 +3,7 @@ package com.haulmont.cloudcontrol.actions
 class Ansible implements Action, Serializable {
 
     private static String CONTAINER = 'ansible'
+    private static String IMAGE = 'ansible/ansible-runner:1.4.7'
 
     @Override
     void action(def script) {
@@ -17,6 +18,11 @@ class Ansible implements Action, Serializable {
     @Override
     String getContainerName() {
         return CONTAINER
+    }
+
+    @Override
+    String getImage() {
+        return IMAGE
     }
 
 }

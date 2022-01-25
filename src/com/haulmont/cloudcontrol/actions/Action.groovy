@@ -7,4 +7,6 @@ interface Action {
     void rollback(def script)
 
     String getContainerName()
+
+    String getImage()
 }

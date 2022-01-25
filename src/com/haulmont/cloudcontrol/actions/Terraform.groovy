@@ -3,6 +3,7 @@ package com.haulmont.cloudcontrol.actions
 class Terraform implements Action, Serializable {
 
     private static String CONTAINER = 'terraform'
+    private static String IMAGE = 'hashicorp/terraform:1.0.6'
 
     @Override
     void action(def script) {
@@ -18,6 +19,11 @@ class Terraform implements Action, Serializable {
     @Override
     String getContainerName() {
         return CONTAINER
+    }
+
+    @Override
+    String getImage() {
+        return IMAGE
     }
 
 }

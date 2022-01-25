@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 package vars
 
-import com.haulmont.cloudcontrol.ClassKeeper
 import com.haulmont.cloudcontrol.Utils
 import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
@@ -14,13 +13,9 @@ def call(String request) {
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
 
-    def arr = []
-    arr.add(containerTemplate(name: 'terraform', image: 'hashicorp/terraform:1.0.6', command: 'sleep', args: '99d'))
-    arr.add(containerTemplate(name: 'ansible', image: 'ansible/ansible-runner:1.4.7', command: 'sleep', args: '99d'))
-    arr.add(containerTemplate(name: 'aws', image: 'amazon/aws-cli:2.4.12', command: 'sleep', args: '99d'))
-
-
-    podTemplate(containers: arr) {
+    podTemplate(containers: Utils.getContainers(structure[GlobalVars.ACTIONS]),
+            volumes: [emptyDirVolume(name: 'shared', mountPath: '/shared')]
+    ) {
         node(POD_LABEL) {
 
             if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
@@ -42,7 +37,6 @@ def call(String request) {
             }
 
             Notifier.send(this, flowStatus)
-
         }
     }
 }
