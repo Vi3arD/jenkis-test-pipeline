@@ -19,6 +19,7 @@ class Utils {
             def executor = beans.get(actions[i][GlobalVars.EXECUTOR])
             result.add(containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
         }
+        return result
     }
 
     static void make(def script, def action, boolean isRollback = false) {
