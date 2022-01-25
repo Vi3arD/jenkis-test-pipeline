@@ -13,7 +13,7 @@ def call(String request) {
     int currentStep
     int size = structure[GlobalVars.ACTIONS].size()
 
-    podTemplate(containers: Utils.getContainers(structure[GlobalVars.ACTIONS]),
+    podTemplate(containers: Utils.getContainers(this, structure[GlobalVars.ACTIONS]),
             volumes: [emptyDirVolume(name: 'shared', mountPath: '/shared')]
     ) {
         node(POD_LABEL) {

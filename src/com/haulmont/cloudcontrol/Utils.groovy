@@ -12,12 +12,12 @@ class Utils {
         }
     }
 
-    static ArrayList getContainers(def actions) {
+    static ArrayList getContainers(def script, def actions) {
         def result = []
         Map beans = ClassKeeper.getBeans()
         for (int i = 0; i < actions.size(); i++) {
             def executor = beans.get(actions[i][GlobalVars.EXECUTOR])
-            result.add(containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
+            result.add(script.containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
         }
         return result
     }
