@@ -8,7 +8,7 @@ class GlobalVars {
     static String NAME = "name"
     static String EXECUTOR = "executor"
 
-    static String INSTALL = "install"
+    static String CREATE = "create"
     static String DESTROY = "destroy"
 
     static String AWS_REGION = "AWS_REGION"

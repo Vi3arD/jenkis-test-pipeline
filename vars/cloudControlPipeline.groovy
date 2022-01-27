@@ -16,8 +16,8 @@ def call(String request) {
             String flowStatus = "success"
             int currentStep
             int size = structure[GlobalVars.ACTIONS].size()
-            
-            if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
+
+            if (GlobalVars.CREATE.equals(structure[GlobalVars.TYPE])) {
                 try {
                     for (currentStep = 0; currentStep < size; currentStep++) {
                         Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
