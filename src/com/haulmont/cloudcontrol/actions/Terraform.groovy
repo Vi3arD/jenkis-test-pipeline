@@ -1,5 +1,7 @@
 package com.haulmont.cloudcontrol.actions
 
+import com.haulmont.cloudcontrol.GlobalVars
+
 class Terraform implements Action, Serializable {
 
     private static String CONTAINER = 'terraform'
@@ -9,7 +11,31 @@ class Terraform implements Action, Serializable {
     void action(def script) {
         script.sh "echo TERRAFORM ACTION"
         script.sh "cd /shared && ls -lsa"
-        throw new RuntimeException("i'am error")
+        script.dir('/shared/scripts/terraform') {
+            script.sh('''
+                        terraform init \
+                            -backend-config="bucket=${script.env[GlobalVars.BUCKET_NAME]}" \
+                            -reconfigure \
+                            -input=false
+            ''')
+            script.sh('''
+                        terraform plan \
+                            -var="region=${script.env[GlobalVars.AWS_REGION]}" \
+                            -input=false \
+                            -out=terraform.tfplan
+            ''')
+            script.sh('terraform apply -auto-approve -input=false terraform.tfplan')
+
+            script.env[GlobalVars.INSTANCE_IP] = script.sh(
+                    script: 'terraform output -raw instanceIp',
+                    returnStdout: true
+            ).trim()
+
+            script.env[GlobalVars.INSTANCE_ID] = script.sh(
+                    script: 'terraform output -raw instanceId',
+                    returnStdout: true
+            ).trim()
+        }
     }
 
     @Override

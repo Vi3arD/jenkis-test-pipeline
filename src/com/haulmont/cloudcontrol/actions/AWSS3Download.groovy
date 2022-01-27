@@ -9,13 +9,12 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/terraform /shared --recursive"
-        script.sh "cd /shared && ls -lsa"
+        script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/scripts /shared --recursive"
     }
 
     @Override
     void rollback(def script) {
-        script.sh "echo AWSS3Download rollback"
+        script.sh "echo AWSS3Download rollback not implemented"
     }
 
     @Override

@@ -9,20 +9,14 @@ def call(String request) {
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
-    String flowStatus = "success"
-    int currentStep
-    int size = structure[GlobalVars.ACTIONS].size()
-
     podTemplate(containers: Utils.getContainers(this, structure[GlobalVars.ACTIONS]),
             volumes: [emptyDirVolume(mountPath: '/shared')]
     ) {
         node(POD_LABEL) {
-
-            def cls = Class.forName("com.haulmont.cloudcontrol.actions.Ansible", true, Thread.currentThread().getContextClassLoader())
-            def ans = cls.getDeclaredConstructor().newInstance()
-            ans.rollback(this)
-
-
+            String flowStatus = "success"
+            int currentStep
+            int size = structure[GlobalVars.ACTIONS].size()
+            
             if (GlobalVars.INSTALL.equals(structure[GlobalVars.TYPE])) {
                 try {
                     for (currentStep = 0; currentStep < size; currentStep++) {
