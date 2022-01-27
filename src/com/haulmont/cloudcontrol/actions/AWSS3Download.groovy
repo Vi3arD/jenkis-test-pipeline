@@ -9,7 +9,7 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.sh('echo ---- ${script.env[GlobalVars.BUCKET_NAME]} ----')
+        script.sh('echo ---- ${env[GlobalVars.BUCKET_NAME]} ----')
         script.sh('echo ###### ${BUCKET_NAME} ######')
         script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/scripts /shared --recursive"
     }
