@@ -1,5 +1,7 @@
 package src.com.haulmont.cloudcontrol.actions
 
+import com.haulmont.cloudcontrol.GlobalVars
+
 class RegisterDomain implements Action, Serializable {
 
     private static String CONTAINER = 'alpine'
@@ -7,12 +9,9 @@ class RegisterDomain implements Action, Serializable {
 
     @Override
     void action(def script) {
-        try {
-            def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', customHeaders: [[name: 'X-Jenkins-Token', value: "${CLOUD_CONTROL_AUTH_TOKEN}"]], url: "${CALLBACK_URL}/rest/jenkins/failed?workspaceId=${WORKSPACE_ID}&deploymentId=${DEPLOYMENT_ID}", validResponseCodes: '200'
-
-            return response.status == "200"
-        } catch (err) {
-            return false
+        def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', customHeaders: [[name: 'X-Jenkins-Token', value: "${script.env[GlobalVars.CLOUD_CONTROL_AUTH_TOKEN]}"]], url: "${script.env[GlobalVars.CALLBACK_URL]}/rest/jenkins/register_domain?workspaceId=${script.env[GlobalVars.WORKSPACE_ID]}&deploymentId=${script.env[GlobalVars.DEPLOYMENT_ID]}&instanceIp=${script.env[GlobalVars.INSTANCE_IP]}", validResponseCodes: '200'
+        if (response.status != "200") {
+            throw new RuntimeException("Error during register domain")
         }
     }
 
