@@ -5,7 +5,7 @@ import com.haulmont.cloudcontrol.GlobalVars
 class RegisterDomain implements Action, Serializable {
 
     private static String CONTAINER = 'alpine'
-    private static String IMAGE = 'latest'
+    private static String IMAGE = '3.15.0'
 
     @Override
     void action(def script) {
