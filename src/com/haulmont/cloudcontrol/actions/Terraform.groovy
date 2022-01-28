@@ -41,13 +41,13 @@ class Terraform implements Action, Serializable {
     @Override
     void rollback(def script) {
         script.dir('/shared/terraform'){
-            sh("""
+            script.sh("""
                     terraform init \
                     -backend-config="bucket=${script.env[GlobalVars.BUCKET_NAME]}" \
                     -reconfigure \
                     -input=false
             """)
-            sh("""terraform destroy -auto-approve -input=false -var="region=${script.env[GlobalVars.AWS_REGION]}" """)
+            script.sh("""terraform destroy -auto-approve -input=false -var="region=${script.env[GlobalVars.AWS_REGION]}" """)
         }
     }
 
