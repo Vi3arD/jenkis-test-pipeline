@@ -12,6 +12,13 @@ import com.haulmont.cloudcontrol.GlobalVars;
 @Grab(group='org.jboss.spec.javax.annotation', module='jboss-annotations-api_1.3_spec', version='2.0.1.Final')
 @Grab(group='org.jboss.spec.javax.ws.rs', module='jboss-jaxrs-api_2.1_spec', version='2.0.1.Final')
 
+
+@Grab(group='org.jboss.resteasy', module='resteasy-client', version='3.0.14.Final')
+@Grab(group='org.jboss.resteasy', module='resteasy-multipart-provider', version='3.0.14.Final')
+@Grab(group='org.jboss.resteasy', module='resteasy-jackson2-provider', version='3.0.14.Final')
+@Grab(group='org.jboss.resteasy', module='resteasy-jaxb-provider', version='3.0.14.Final')
+@Grab(group='org.jboss.resteasy', module='resteasy-jettison-provider', version='3.0.14.Final')
+
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
