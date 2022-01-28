@@ -24,7 +24,12 @@ class KeycloakConfigure implements Action, Serializable {
 
     @Override
     void action(def script) {
-        Keycloak keycloak = getKeycloak(script)
+        Keycloak keycloak = Keycloak.getInstance(
+                "${script.env[GlobalVars.KEYCLOAK_URL]}/auth",
+                "${script.env[GlobalVars.KEYCLOAK_ADMIN_REALM]}",
+                "${script.env[GlobalVars.KEYCLOAK_ADMIN_USERNAME]}",
+                "${script.env[GlobalVars.KEYCLOAK_ADMIN_PASSWORD]}",
+                "${script.env[GlobalVars.KEYCLOAK_ADMIN_CLIENT_ID]}")
 
         ProtocolMapperRepresentation protocolMapperRepresentation = new ProtocolMapperRepresentation()
         protocolMapperRepresentation.setProtocol('openid-connect')
