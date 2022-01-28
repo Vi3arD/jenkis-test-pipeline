@@ -9,6 +9,7 @@ class RegisterDomain implements Action, Serializable {
 
     @Override
     void action(def script) {
+        script.sh("echo ratatata")
         script.waitUntil(initialRecurrencePeriod: 90000) {
             script.sh("echo tyty")
         }
