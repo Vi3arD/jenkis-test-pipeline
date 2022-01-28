@@ -1,4 +1,4 @@
-package src.com.haulmont.cloudcontrol.actions
+package com.haulmont.cloudcontrol.actions
 
 import com.haulmont.cloudcontrol.GlobalVars;
 @Grab(group = 'org.keycloak', module = 'keycloak-admin-client', version = '13.0.0')

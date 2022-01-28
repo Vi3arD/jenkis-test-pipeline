@@ -1,4 +1,4 @@
-package src.com.haulmont.cloudcontrol.actions
+package com.haulmont.cloudcontrol.actions
 
 class AWSCheckInstance implements Action, Serializable {
 
