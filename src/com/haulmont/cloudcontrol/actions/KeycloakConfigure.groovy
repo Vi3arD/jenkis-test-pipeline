@@ -10,6 +10,7 @@ import com.haulmont.cloudcontrol.GlobalVars;
 @Grab(group='com.github.fge', module='json-patch', version='1.9')
 @Grab(group='org.glassfish.jaxb', module='jaxb-runtime', version='3.0.2-b01')
 @Grab(group='org.jboss.spec.javax.annotation', module='jboss-annotations-api_1.3_spec', version='2.0.1.Final')
+@Grab(group='javax.ws.rs', module='javax.ws.rs-api', version='2.0')
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
