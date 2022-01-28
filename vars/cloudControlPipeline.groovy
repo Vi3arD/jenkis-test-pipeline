@@ -30,7 +30,7 @@ def call(String request) {
                     echo "error -> ${e}"
                 }
             } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
-                for (currentStep = size - 1; currentStep >= 0; currentStep--) {
+                for (currentStep = 0; currentStep < size; currentStep++) {
                     Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
                 }
             }
