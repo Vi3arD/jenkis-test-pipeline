@@ -10,7 +10,7 @@ class RegisterDomain implements Action, Serializable {
     @Override
     void action(def script) {
         script.waitUntil(initialRecurrencePeriod: 90000) {
-            script.sh("tyty")
+            script.sh("echo tyty")
         }
 //        def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'GET', customHeaders: [[name: 'X-Jenkins-Token', value: "${script.env[GlobalVars.CLOUD_CONTROL_AUTH_TOKEN]}"]], url: "${script.env[GlobalVars.CALLBACK_URL]}/rest/jenkins/register_domain?workspaceId=${script.env[GlobalVars.WORKSPACE_ID]}&deploymentId=${script.env[GlobalVars.DEPLOYMENT_ID]}&instanceIp=${script.env[GlobalVars.INSTANCE_IP]}", validResponseCodes: '200'
 //        if (response.status != "200") {
