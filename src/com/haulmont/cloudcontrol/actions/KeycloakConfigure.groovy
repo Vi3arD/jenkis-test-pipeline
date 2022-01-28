@@ -12,7 +12,7 @@ import java.io.Serializable;
 class KeycloakConfigure implements Action, Serializable {
 
     private static String CONTAINER = "alpine"
-    private static String IMAGE = "3.15.0"
+    private static String IMAGE = "alpine:3.15.0"
 
     @Override
     void action(def script) {
