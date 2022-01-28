@@ -9,7 +9,8 @@ class AWSCheckInstance implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.waitUntil(initialRecurrencePeriod: 30000) {
+        boolean result = false
+        script.waitUntil(initialRecurrencePeriod: 15000) {
             String status = script.sh(
                     script: """
                                 aws ec2 describe-instance-status \
@@ -20,9 +21,11 @@ class AWSCheckInstance implements Action, Serializable {
                             """,
                     returnStdout: true
             ).trim()
-            if (status != "passed") {
-                throw new RuntimeException("Instance isn't ready to next installation")
-            }
+            result = status == "passed"
+            return result
+        }
+        if (!result) {
+            throw new RuntimeException("Instance isn't ready to next installation")
         }
     }
 
