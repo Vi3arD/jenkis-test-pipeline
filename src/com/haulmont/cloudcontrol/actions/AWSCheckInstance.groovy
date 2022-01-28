@@ -7,7 +7,7 @@ class AWSCheckInstance implements Action, Serializable {
 
     @Override
     void action(def script) {
-        waitUntil(initialRecurrencePeriod: 15000) {
+        script.waitUntil(initialRecurrencePeriod: 15000) {
             String status = script.sh(
                     script: """
                                 aws ec2 describe-instance-status \
