@@ -13,7 +13,7 @@ import com.haulmont.cloudcontrol.GlobalVars
 @Grab('org.jboss.logging:jboss-logging:3.4.2.Final')
 @Grab('org.jboss.resteasy:resteasy-client:3.13.2.Final')
 @Grab('org.jboss.resteasy:resteasy-jaxb-provider:3.13.2.Final')
-@Grab('org.glassfish.jaxb:jaxb-runtime:2.3.4 (*)')
+@Grab('org.glassfish.jaxb:jaxb-runtime:2.3.4')
 @Grab('org.jboss.spec.javax.xml.bind:jboss-jaxb-api_2.3_spec:2.0.0.Final')
 @Grab('org.jboss.resteasy:resteasy-jaxrs:3.13.2.Final')
 @Grab('com.fasterxml.jackson.core:jackson-annotations:2.12.3')
