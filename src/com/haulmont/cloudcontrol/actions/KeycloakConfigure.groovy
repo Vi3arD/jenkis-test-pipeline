@@ -8,6 +8,7 @@ import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.GroupRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
 import java.io.Serializable;
+import com.haulmont.cloudcontrol.GlobalVars
 
 class KeycloakConfigure implements Action, Serializable {
 

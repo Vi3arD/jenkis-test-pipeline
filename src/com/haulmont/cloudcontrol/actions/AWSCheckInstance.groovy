@@ -1,5 +1,7 @@
 package com.haulmont.cloudcontrol.actions
 
+import com.haulmont.cloudcontrol.GlobalVars
+
 class AWSCheckInstance implements Action, Serializable {
 
     private static String CONTAINER = "aws-cli"
