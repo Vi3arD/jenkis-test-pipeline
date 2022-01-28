@@ -9,7 +9,7 @@ class Ansible implements Action, Serializable {
 
     @Override
     void action(def script) {
-        script.dir('/shared/scripts/ansible') {
+        script.dir('/shared/ansible') {
             sh("""echo "[gitlab_aws]\ngitlab ansible_host=${script.env[GlobalVars.INSTANCE_IP]} ansible_user=ubuntu" > inventory""")
 //            sh('echo $OPENSSH_KEY > k1_temp.pem')
 //            sh('sed -e "s/-----BEGIN RSA PRIVATE KEY----- //g" -i k1_temp.pem')
