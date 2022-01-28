@@ -8,7 +8,6 @@ import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.GroupRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
 import java.io.Serializable;
-import com.haulmont.cloudcontrol.GlobalVars
 
 class KeycloakConfigure implements Action, Serializable {
 
@@ -17,7 +16,7 @@ class KeycloakConfigure implements Action, Serializable {
 
     @Override
     void action(def script) {
-        Keycloak keycloak = getKeycloak()
+        Keycloak keycloak = getKeycloak(script)
 
         ProtocolMapperRepresentation protocolMapperRepresentation = new ProtocolMapperRepresentation()
         protocolMapperRepresentation.setProtocol('openid-connect')
@@ -42,7 +41,7 @@ class KeycloakConfigure implements Action, Serializable {
 
     @Override
     void rollback(def script) {
-        Keycloak keycloak = getKeycloak()
+        Keycloak keycloak = getKeycloak(script)
 
         def clients = keycloak
                 .realm("${script.env[GlobalVars.WORKSPACE_ID]}")
@@ -65,7 +64,7 @@ class KeycloakConfigure implements Action, Serializable {
         return IMAGE
     }
 
-    private Keycloak getKeycloak() {
+    private Keycloak getKeycloak(def script) {
         return Keycloak.getInstance(
                 "${script.env[GlobalVars.KEYCLOAK_URL]}/auth",
                 "${script.env[GlobalVars.KEYCLOAK_ADMIN_REALM]}",

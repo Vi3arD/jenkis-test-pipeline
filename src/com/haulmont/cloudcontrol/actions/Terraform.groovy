@@ -29,6 +29,12 @@ class Terraform implements Action, Serializable {
                     returnStdout: true
             ).trim()
 
+            //for test
+            script.env[GlobalVars.INSTANCE_URL] = script.sh(
+                    script: "terraform output -raw instanceUrl",
+                    returnStdout: true
+            ).trim()
+
             script.env[GlobalVars.INSTANCE_ID] = script.sh(
                     script: "terraform output -raw instanceId",
                     returnStdout: true
