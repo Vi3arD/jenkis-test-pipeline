@@ -14,8 +14,9 @@ class AWSS3Download implements Action, Serializable {
 
     @Override
     void rollback(def script) {
-        script.sh "echo AWSS3Download rollback not implemented"
-        script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/scripts /shared --recursive"
+        if (!GlobalVars.CREATE.equals(script.env[GlobalVars.TYPE])) {
+            script.sh "aws s3 cp s3://${script.env[GlobalVars.BUCKET_NAME]}/scripts /shared --recursive"
+        }
     }
 
     @Override

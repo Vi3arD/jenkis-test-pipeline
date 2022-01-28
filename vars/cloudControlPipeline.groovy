@@ -7,6 +7,7 @@ import com.haulmont.cloudcontrol.Notifier
 
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
+    env[GlobalVars.TYPE] = structure[GlobalVars.TYPE]
     Utils.toEnv(this, structure[GlobalVars.ENV])
 
     podTemplate(containers: Utils.getContainers(this, structure[GlobalVars.ACTIONS]),
