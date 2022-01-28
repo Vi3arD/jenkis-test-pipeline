@@ -34,13 +34,21 @@ class Terraform implements Action, Serializable {
                     returnStdout: true
             ).trim()
 
-            script.sh 'terraform output -raw openssh_key > ../ansible/key.pem'
+            script.sh 'terraform output -raw opensshKey > ../ansible/key.pem'
         }
     }
 
     @Override
     void rollback(def script) {
-        script.sh "echo TERRAFORM ROLLBACK"
+        script.dir('/shared/terraform'){
+            sh("""
+                    terraform init \
+                    -backend-config="bucket=${script.env[GlobalVars.BUCKET_NAME]}" \
+                    -reconfigure \
+                    -input=false
+            """)
+            sh("""terraform destroy -auto-approve -input=false -var="region=${script.env[GlobalVars.AWS_REGION]}" """)
+        }
     }
 
     @Override
