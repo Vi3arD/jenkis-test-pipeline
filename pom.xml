@@ -51,11 +51,10 @@
             <version>${groovy.core.version}</version>
         </dependency>
 
-        <!-- provides echo() step -->
         <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-basic-steps</artifactId>
-            <version>2.6</version>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <version>1.0.0.Final</version>
         </dependency>
 
         <dependency>
