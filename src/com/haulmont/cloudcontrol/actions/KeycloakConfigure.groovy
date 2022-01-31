@@ -66,6 +66,8 @@ class KeycloakConfigure implements Action, Serializable {
                 "${script.env[GlobalVars.KEYCLOAK_ADMIN_PASSWORD]}",
                 "${script.env[GlobalVars.KEYCLOAK_ADMIN_CLIENT_ID]}")
 
+        script.sh("echo tyt 0 ")
+
         ProtocolMapperRepresentation protocolMapperRepresentation = new ProtocolMapperRepresentation()
         protocolMapperRepresentation.setProtocol('openid-connect')
         protocolMapperRepresentation.setName('roles')
@@ -78,11 +80,15 @@ class KeycloakConfigure implements Action, Serializable {
                 'userinfo.token.claim': 'true'
         ])
 
+        script.sh("echo tyt 1 ")
+
         ClientRepresentation clientRepresentation = new ClientRepresentation()
         clientRepresentation.setClientId("gitlab-${script.env[GlobalVars.WORKSPACE_ID]}")
         clientRepresentation.setRedirectUris(["${script.env[GlobalVars.INSTANCE_URL]}*"])
         clientRepresentation.setSecret("${script.env[GlobalVars.KEYCLOAK_GITLAB_CLIENT_SECRET]}")
         clientRepresentation.setProtocolMappers([protocolMapperRepresentation])
+
+        script.sh("echo tyt 2 ")
 
         keycloak.realm("${script.env[GlobalVars.WORKSPACE_ID]}").clients().create(clientRepresentation)
     }

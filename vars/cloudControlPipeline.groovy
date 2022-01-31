@@ -19,17 +19,17 @@ def call(String request) {
             int size = structure[GlobalVars.ACTIONS].size()
 
             if (GlobalVars.CREATE.equals(structure[GlobalVars.TYPE])) {
-                try {
+//                try {
                     for (currentStep = 0; currentStep < size; currentStep++) {
                         Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
                     }
-                } catch (Exception e) {
-                    for (currentStep; currentStep >= 0; currentStep--) {
-                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
-                    }
-                    flowStatus = "failed"
-                    echo "error -> ${e}"
-                }
+//                } catch (Exception e) {
+//                    for (currentStep; currentStep >= 0; currentStep--) {
+//                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+//                    }
+//                    flowStatus = "failed"
+//                    echo "error -> ${e}"
+//                }
             } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
                 for (currentStep = 0; currentStep < size; currentStep++) {
                     Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
