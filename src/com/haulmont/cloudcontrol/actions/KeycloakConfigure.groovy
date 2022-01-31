@@ -50,6 +50,10 @@ import com.haulmont.cloudcontrol.GlobalVars
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
+import org.keycloak.OAuth2Constants
+import org.keycloak.admin.client.Keycloak
+import org.keycloak.admin.client.KeycloakBuilder
 import java.io.Serializable;
 
 class KeycloakConfigure implements Action, Serializable {
@@ -59,12 +63,24 @@ class KeycloakConfigure implements Action, Serializable {
 
     @Override
     void action(def script) {
-        Keycloak keycloak = Keycloak.getInstance(
-                "${script.env[GlobalVars.KEYCLOAK_URL]}/auth",
-                "${script.env[GlobalVars.KEYCLOAK_ADMIN_REALM]}",
-                "${script.env[GlobalVars.KEYCLOAK_ADMIN_USERNAME]}",
-                "${script.env[GlobalVars.KEYCLOAK_ADMIN_PASSWORD]}",
-                "${script.env[GlobalVars.KEYCLOAK_ADMIN_CLIENT_ID]}")
+        script.sh("echo tyt -1 ")
+//        Keycloak keycloak = Keycloak.getInstance(
+//                "${script.env[GlobalVars.KEYCLOAK_URL]}/auth",
+//                "${script.env[GlobalVars.KEYCLOAK_ADMIN_REALM]}",
+//                "${script.env[GlobalVars.KEYCLOAK_ADMIN_USERNAME]}",
+//                "${script.env[GlobalVars.KEYCLOAK_ADMIN_PASSWORD]}",
+//                "${script.env[GlobalVars.KEYCLOAK_ADMIN_CLIENT_ID]}")
+
+        Keycloak keycloak = KeycloakBuilder
+                .builder()
+                .grantType(OAuth2Constants.PASSWORD)
+                .serverUrl("${script.env[GlobalVars.KEYCLOAK_URL]}/auth")
+                .realm("${script.env[GlobalVars.KEYCLOAK_ADMIN_REALM]}")
+                .username("${script.env[GlobalVars.KEYCLOAK_ADMIN_USERNAME]}")
+                .password("${script.env[GlobalVars.KEYCLOAK_ADMIN_PASSWORD]}")
+                .clientId("${script.env[GlobalVars.KEYCLOAK_ADMIN_CLIENT_ID]}")
+                .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build())
+                .build();
 
         script.sh("echo tyt 0 ")
 
