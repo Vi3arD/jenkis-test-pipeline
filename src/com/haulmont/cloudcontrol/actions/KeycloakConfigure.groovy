@@ -1,8 +1,8 @@
 package com.haulmont.cloudcontrol.actions
 
 
-@Grab(group='org.keycloak', module='keycloak-admin-client', version='13.0.0')
-@Grab(group='org.keycloak', module='keycloak-core', version='13.0.0')
+@Grab(group='org.keycloak', module='keycloak-admin-client', version='15.0.1')
+@Grab(group='org.keycloak', module='keycloak-core', version='15.0.1')
 @Grab(group='org.reactivestreams', module='reactive-streams', version='1.0.3')
 @Grab(group='jakarta.validation', module='jakarta.validation-api', version='3.0.0')
 @Grab(group='com.github.stephenc.jcip', module='jcip-annotations', version='1.0-1')
