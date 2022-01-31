@@ -98,7 +98,7 @@ class KeycloakConfigure implements Action, Serializable {
 
         String id = clients.get(0).getId()
         if (id != null) {
-            keycloak.realm(workspaceId).clients().get(id).remove();
+            keycloak.realm("${script.env[GlobalVars.WORKSPACE_ID]}").clients().get(id).remove();
         }
     }
 
