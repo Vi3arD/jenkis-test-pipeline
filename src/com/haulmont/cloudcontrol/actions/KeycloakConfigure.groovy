@@ -1,7 +1,6 @@
 package com.haulmont.cloudcontrol.actions
 
-import com.haulmont.cloudcontrol.GlobalVars
-//@Grab('org.keycloak:keycloak-admin-client:3.2.1.Final')
+@Grab('org.keycloak:keycloak-admin-client:3.2.1.Final')
 @Grab('org.jboss.resteasy:resteasy-client:3.0.14.Final')
 @Grab('org.jboss.resteasy:resteasy-multipart-provider:3.0.14.Final')
 @Grab('org.jboss.resteasy:resteasy-jackson2-provider:3.0.14.Final')
@@ -9,7 +8,8 @@ import com.haulmont.cloudcontrol.GlobalVars
 @Grab('org.jboss.resteasy:resteasy-jettison-provider:3.0.14.Final')
 @Grab('org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec:1.0.0.Final')
 
-
+import com.haulmont.cloudcontrol.GlobalVars
+import javax.ws.rs.ext.MessageBodyReader
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
