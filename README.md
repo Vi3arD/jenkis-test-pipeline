@@ -1,1 +1,1 @@
-# jenkins-shared-library
+# gitlab child pipe
