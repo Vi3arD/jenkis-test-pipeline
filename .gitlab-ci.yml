@@ -4,4 +4,4 @@ default:
 build-job:
   stage: build
   script:
-    - echo "Hello, I'm BUILD!"
+    - echo "Hello, I'm ANOTHER!"
