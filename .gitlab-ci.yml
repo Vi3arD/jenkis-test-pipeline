@@ -8,8 +8,3 @@ build-job:
   stage: build
   script:
     - echo "Hello, I'm VALUE!"
-
-build-job-one:
-  stage: build
-  script:
-    - echo "Hello, I'm VALUE ONE!"
