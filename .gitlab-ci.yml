@@ -9,10 +9,10 @@ build-job:
   script:
     - echo "Hello, I'm VALUE!"
 
-build-job-other:
-  stage: build
-  script:
-    - echo $TEST_VAR!
+# build-job-other:
+#   stage: build
+#   script:
+#     - echo $TEST_VAR!
     
 build-job-third:
   stage: build
