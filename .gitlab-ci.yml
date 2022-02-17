@@ -5,3 +5,8 @@ build-job:
   stage: build
   script:
     - echo "Hello, I'm ANOTHER!"
+
+build-job-other:
+  stage: build
+  script:
+    - echo "Hello, I'm $TEST_VAR!"
