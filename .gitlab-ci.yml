@@ -9,4 +9,9 @@ build-job:
 build-job-other:
   stage: build
   script:
-    - echo "Hello, I'm $TEST_VAR!"
+    - echo "Hello, I'm from pipeline manual var $TEST_VAR!"
+    
+build-job-third:
+  stage: build
+  script:
+    - echo "Hello, I'm from global var $MY_BRANCH!"    
