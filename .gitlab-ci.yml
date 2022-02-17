@@ -1,5 +1,8 @@
 default:
   image: ruby:2.7.4
+  
+variables:
+  TEST_VAR: $TEST_VAR  
 
 build-job:
   stage: build
