@@ -1,6 +1,6 @@
 always_job:
-  variables:
-    TEST_VAR: $TEST_VAR
+#   variables:
+#     TEST_VAR: $TEST_VAR
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/$MY_BRANCH/.gitlab-ci.yml"
     strategy: depend
