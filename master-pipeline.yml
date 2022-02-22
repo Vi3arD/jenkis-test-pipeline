@@ -4,12 +4,14 @@ always_job:
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/$MY_BRANCH/.gitlab-ci.yml"
     strategy: depend
+  rules:
+    - if: $TEST_VAR == "trigger"    
     
-# trigger_job:
-#   variables:
-#     TEST_VAR: $TEST_VAR
-#   trigger:
-#     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/trigger-job.yml"
-#     strategy: depend    
-#   rules:
-#     - if: $CI_COMMIT_REF_NAME 
+trigger_job:
+  variables:
+    TEST_VAR: $TEST_VAR
+  trigger:
+    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/trigger-job.yml"
+    strategy: depend    
+  rules:
+    - if: $TEST_VAR == "trigger" 
