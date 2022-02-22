@@ -1,0 +1,8 @@
+default:
+  image: ruby:2.7.4
+
+job:
+  stage: build
+  script:
+    - echo "TRIGGER JOB!"
+    - echo "------- $TEST_VAR ---------"
