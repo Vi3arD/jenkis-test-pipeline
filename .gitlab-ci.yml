@@ -1,7 +1,8 @@
 default:
   image: ruby:2.7.4
   
-# variables:
+variables:
+  WEE: $MY_BRANCH
 #   TEST_VAR: $TEST_VAR  
 
 build-job:
@@ -17,4 +18,4 @@ build-job-1:
 build-job-2:
   stage: build
   script:
-    - echo "Hello, I'm $MY_BRANCH!"
+    - echo "Hello, I'm $MY_BRANCH and $WEE!"
