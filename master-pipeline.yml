@@ -8,6 +8,7 @@ always_job:
 trigger_job:
   variables:
     TEST_VAR: $TEST_VAR
+    FOOO: $FOOO
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/trigger-job.yml"
     strategy: depend    
