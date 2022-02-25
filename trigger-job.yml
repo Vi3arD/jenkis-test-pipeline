@@ -7,3 +7,4 @@ job:
     - echo "TRIGGER JOB!"
     - echo "------- $TEST_VAR ---------"
     - echo "$FOOO"
+    - printenv 
