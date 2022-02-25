@@ -12,7 +12,7 @@ build-job:
 build-job-1:
   stage: build
   script:
-    - echo "Hello, I'm $TEST_VAR!"
+    - echo "Hello, I'm $DEMO_VAR!"
 
 build-job-2:
   stage: build
