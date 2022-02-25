@@ -5,4 +5,5 @@ job:
   stage: build
   script:
     - echo "TRIGGER JOB!"
+    - echo "$FOOO ########_#######_######"
     - echo "------- $TEST_VAR ---------"
