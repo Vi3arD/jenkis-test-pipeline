@@ -1,6 +1,10 @@
 default:
   image: ruby:2.7.4
   
+stages:
+  - build
+  - docker
+  
 variables:
   WEE: $MY_BRANCH
 #   TEST_VAR: $TEST_VAR  
@@ -19,3 +23,14 @@ build-job-2:
   stage: build
   script:
     - echo "Hello, I'm $MY_BRANCH and $WEE!"
+    
+docker:
+  image: docker:latest
+  stage: dcoker
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build -t $DEMO_VAR/$MY_BRANCH .
+    - docker push $DEMO_VAR/$MY_BRANCH
