@@ -2,31 +2,31 @@ default:
   image: ruby:2.7.4
   
 stages:
-  - build
-  - docker
+  - echoer
+  - dock
   
 variables:
   WEE: $MY_BRANCH
 #   TEST_VAR: $TEST_VAR  
 
 build-job:
-  stage: build
+  stage: echoer
   script:
     - echo "Hello, I'm VALUE!"
 
 build-job-1:
-  stage: build
+  stage: echoer
   script:
     - echo "Hello, I'm $DEMO_VAR!"
 
 build-job-2:
-  stage: build
+  stage: echoer
   script:
     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
 docker:
   image: docker:latest
-  stage: docker
+  stage: dock
   services:
     - docker:dind
   before_script:
