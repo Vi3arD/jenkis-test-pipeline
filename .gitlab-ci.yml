@@ -25,10 +25,10 @@ build-job-2:
     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
 dock:
-  image: docker:latest
-  stage: dock
+  image: docker:19.03.13-dind
   services:
-    - docker:dind
+    - docker:19.03.13-dind
+  stage: dock
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
