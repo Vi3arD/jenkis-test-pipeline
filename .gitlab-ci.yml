@@ -24,7 +24,7 @@ build-job-2:
   script:
     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
-docker:
+dock:
   image: docker:latest
   stage: dock
   services:
