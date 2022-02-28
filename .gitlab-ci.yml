@@ -27,8 +27,8 @@ build-job-2:
 dock:
   image: docker:latest
   stage: dock
-  services:
-    - docker:dind
+#   services:
+#     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
