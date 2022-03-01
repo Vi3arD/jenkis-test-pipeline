@@ -15,5 +15,6 @@ trigger_job:
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/trigger-job.yml"
     strategy: depend    
-  rules:
-    - if: $TEST_VAR == "trigger" 
+  only:
+    variables:
+      - $TEST_VAR == "trigger" 
