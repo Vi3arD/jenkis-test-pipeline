@@ -1,8 +1,8 @@
 default:
   image: ruby:2.7.4
   
-# stages:
-#   - echoer
+stages:
+  - echoer
 #   - dock
   
 variables:
