@@ -4,8 +4,6 @@ always_job:
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/$MY_BRANCH/.gitlab-ci.yml"
     strategy: depend
-  rules:
-    - if: $TEST_VAR == null || $TEST_VAR == ""   
     
 trigger_job:
   variables:
