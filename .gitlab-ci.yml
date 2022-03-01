@@ -13,12 +13,14 @@ build-job:
   stage: build
   script:
     - echo "Hello, I'm VALUE!"
+    - echo "$CI_JOB_JWT"
+    - echo $CI_JOB_JWT | base64
     
-send:
-  image: alpine/curl
-  stage: build
-  script:
-    - 'curl -X POST "http://host.docker.internal:8080/rest/v1/webhook/artifact/master/1" -H "X-Gitlab-Token: $CC_M2M_TOKEN"'
+# send:
+#   image: alpine/curl
+#   stage: build
+#   script:
+#     - 'curl -X POST "http://host.docker.internal:8080/rest/v1/webhook/artifact/master/1" -H "X-Gitlab-Token: $CC_M2M_TOKEN"'
 
 # build-job-1:
 #   stage: build
