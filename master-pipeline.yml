@@ -2,7 +2,7 @@ always_job:
   variables:
     DEMO_VAR: $DEMO_VAR
   trigger:
-    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/$MY_BRANCH/.gitlab-ci.yml"
+    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/.gitlab-ci.yml"
     strategy: depend
   except:
     variables:
