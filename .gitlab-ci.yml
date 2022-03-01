@@ -1,9 +1,9 @@
 default:
   image: ruby:2.7.4
   
-stages:
-  - echoer
-  - dock
+# stages:
+#   - echoer
+#   - dock
   
 variables:
   WEE: $MY_BRANCH
@@ -13,6 +13,7 @@ build-job:
   stage: echoer
   script:
     - echo "Hello, I'm VALUE!"
+    - echo "JOB - > $CI_JOB_MANUAL"
 
 build-job-1:
   stage: echoer
@@ -24,13 +25,13 @@ build-job-2:
   script:
     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
-dock:
-  image: docker:19.03.13-dind
-  services:
-    - docker:19.03.13-dind
-  stage: dock
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build -t $DEMO_VAR/$MY_BRANCH .
-    - docker push $DEMO_VAR/$MY_BRANCH
+# dock:
+#   image: docker:19.03.13-dind
+#   services:
+#     - docker:19.03.13-dind
+#   stage: dock
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker build -t $DEMO_VAR/$MY_BRANCH .
+#     - docker push $DEMO_VAR/$MY_BRANCH
