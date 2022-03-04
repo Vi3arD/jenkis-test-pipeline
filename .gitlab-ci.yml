@@ -36,6 +36,9 @@ dock:
   image: docker:19.03.13-dind
   services:
     - docker:19.03.13-dind
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKER_HOST: tcp://localhost:2375  
   stage: build
   before_script:
     - docker info
