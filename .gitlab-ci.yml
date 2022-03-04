@@ -41,6 +41,7 @@ dock:
 #     DOCKER_HOST: tcp://localhost:2378/  
   stage: build
   before_script:
+    - sleep 10m
     - docker info
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
