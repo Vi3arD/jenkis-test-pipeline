@@ -33,12 +33,12 @@ build-job-1:
 #     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
 dock:
-  image: docker:19.03.13-dind
+  image: docker:18.09.7-dind
   services:
-    - docker:19.03.13-dind
+    - docker:18.09.7-dind
   variables:
     DOCKER_DRIVER: overlay
-    DOCKER_HOST: tcp://localhost:2375  
+    DOCKER_HOST: tcp://localhost:2375/  
   stage: build
   before_script:
     - docker info
