@@ -9,12 +9,12 @@ variables:
   WEE: $MY_BRANCH
 #   TEST_VAR: $TEST_VAR  
 
-build-job:
-  stage: build
-  script:
-    - echo "Hello, I'm VALUE!"
-    - echo "$CI_JOB_JWT"
-    - echo $CI_JOB_JWT | base64
+# build-job:
+#   stage: build
+#   script:
+#     - echo "Hello, I'm VALUE!"
+#     - echo "$CI_JOB_JWT"
+#     - echo $CI_JOB_JWT | base64
     
 # send:
 #   image: alpine/curl
@@ -32,13 +32,14 @@ build-job-1:
 #   script:
 #     - echo "Hello, I'm $MY_BRANCH and $WEE!"
     
-# dock:
-#   image: docker:19.03.13-dind
-#   services:
-#     - docker:19.03.13-dind
-#   stage: dock
-#   before_script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#   script:
-#     - docker build -t $DEMO_VAR/$MY_BRANCH .
-#     - docker push $DEMO_VAR/$MY_BRANCH
+dock:
+  image: docker:19.03.13-dind
+  services:
+    - docker:19.03.13-dind
+  stage: dock
+  before_script:
+    - docker info
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build -t $DEMO_VAR/$MY_BRANCH .
+    - docker push $DEMO_VAR/$MY_BRANCH
