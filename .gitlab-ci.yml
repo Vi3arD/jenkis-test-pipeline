@@ -38,7 +38,7 @@ dock:
     - docker:18.09.7-dind
   variables:
     DOCKER_DRIVER: overlay
-    DOCKER_HOST: tcp://localhost:2375/  
+    DOCKER_HOST: tcp://localhost:2378/  
   stage: build
   before_script:
     - docker info
