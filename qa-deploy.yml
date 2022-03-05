@@ -1,7 +1,10 @@
 variables:
+  CC_ARTIFACT: "$CC_ARTIFACT"
   CC_USER: "Super Odmen"
+  CC_ENV: "$CC_ENV"
 
 stages:
+  - cli-step-deploy
   - cli-step-deploy
 
 cli-step-deploy:
@@ -10,5 +13,13 @@ cli-step-deploy:
   script:
     - |
       echo 'hello $CC_USER'
+
+
+cli-step-deploy:
+  image: nginx:latest
+  stage: cli-step-deploy
+  script:
+    - |
+      echo 'Artifact: $CC_ARTIFACT Env: $CC_ENV'
 
 
