@@ -12,7 +12,7 @@ cli-step-deploy:
   stage: cli-step-deploy
   script:
     - |
-      echo 'hello $CC_USER'
+      echo "hello $CC_USER"
 
 
 cli-step-deploy-param:
@@ -20,6 +20,6 @@ cli-step-deploy-param:
   stage: cli-step-deploy-param
   script:
     - |
-      echo 'Artifact: $CC_ARTIFACT Env: $CC_ENV'
+      echo "Artifact: $CC_ARTIFACT Env: $CC_ENV"
 
 
