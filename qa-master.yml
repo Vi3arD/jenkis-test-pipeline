@@ -1,0 +1,25 @@
+build-pipeline:
+  variables:
+    PIPELINE_ID: $PIPELINE_ID
+    CC_M2M_TOKEN: $CC_M2M_TOKEN
+    CC_ARTIFACT_URL: $CC_ARTIFACT_URL
+  trigger:
+    include: "http://localhost:8080/rest/v1/pipeline/3/fhb34hBYU947GI/pipeline.yml"
+    strategy: depend
+  except:
+    variables:
+    - $PIPELINE_ID
+
+deploy-pipeline:
+  variables:
+    PIPELINE_ID: $PIPELINE_ID
+    CC_M2M_TOKEN: $CC_M2M_TOKEN
+    CC_ARTIFACT_URL: $CC_ARTIFACT_URL
+    $CC_USER: "Super Odmen"
+  trigger:
+    include: "http://localhost:8080/rest/v1/pipeline/4/fhb34hBYU947GI/pipeline.yml"
+    strategy: depend
+  only:
+    variables:
+      - $PIPELINE_ID == "4"
+
