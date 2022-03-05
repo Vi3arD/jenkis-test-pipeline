@@ -2,8 +2,8 @@ variables:
   PIPELINE_ID: 3
 
 stages:
-  - gradle-build
-  - cli-step
+#   - gradle-build
+#   - cli-step
   - docker-build
   - docker-push
 
