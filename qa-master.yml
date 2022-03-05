@@ -2,7 +2,7 @@ build-pipeline:
   variables:
     PIPELINE_ID: $PIPELINE_ID
   trigger:
-    include: "http://localhost:8080/rest/v1/pipeline/3/fhb34hBYU947GI/pipeline.yml"
+    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-build.yml"
     strategy: depend
   except:
     variables:
@@ -15,7 +15,7 @@ deploy-pipeline:
     CC_USER: "Super Odmen"
     CC_ENV: "$CC_ENV"
   trigger:
-    include: "http://localhost:8080/rest/v1/pipeline/4/fhb34hBYU947GI/pipeline.yml"
+    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
     strategy: depend
   only:
     variables:
