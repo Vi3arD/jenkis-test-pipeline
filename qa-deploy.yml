@@ -1,0 +1,14 @@
+variables:
+  CC_USER: "Super Odmen"
+
+stages:
+  - cli-step-deploy
+
+cli-step-deploy:
+  image: nginx:latest
+  stage: cli-step-deploy
+  script:
+    - |
+      echo 'hello $CC_USER'
+
+
