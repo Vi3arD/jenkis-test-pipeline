@@ -1,0 +1,52 @@
+variables:
+
+stages:
+  - gradle-build
+  - cli-step
+  - docker-build
+  - docker-push
+
+gradle-build:
+  image: gradle:jdk11
+  stage: gradle-build
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+  script:
+    - gradle build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+
+cli-step:
+  image: nginx:latest
+  stage: cli-step
+  script:
+    - |
+      echo 'hello admin'
+
+
+docker-build:
+  image: docker:latest
+  stage: docker-build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH .
+
+
+
+docker-push:
+  image: docker:latest
+  stage: docker-push
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker push  $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+
+
+
