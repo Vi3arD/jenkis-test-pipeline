@@ -1,4 +1,5 @@
 variables:
+  PIPELINE_ID: 3
 
 stages:
   - gradle-build
