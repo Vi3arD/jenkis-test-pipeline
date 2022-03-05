@@ -1,7 +1,7 @@
 variables:
-  CC_ARTIFACT: "$CC_ARTIFACT"
-  CC_USER: "Super Odmen"
-  CC_ENV: "$CC_ENV"
+  CC_ARTIFACT: $CC_ARTIFACT
+  CC_USER: Super Odmen
+  CC_ENV: $CC_ENV
 
 stages:
   - cli-step-deploy
