@@ -20,6 +20,6 @@ cli-step-deploy-param:
   stage: cli-step-deploy-param
   script:
     - |
-      echo "Artifact: $CC_ARTIFACT Env: $CC_ENV"
+      echo "Artifact: --0--- $CC_ARTIFACT Env: $CC_ENV"
 
 
