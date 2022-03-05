@@ -1,7 +1,5 @@
 build-pipeline:
   variables:
-    PIPELINE_IDSS: 3
-#     PIPELINE_ID: 3
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-build.yml"
     strategy: depend
