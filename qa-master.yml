@@ -13,7 +13,7 @@ deploy-pipeline:
     PIPELINE_ID: $PIPELINE_ID
     CC_ARTIFACT: "$CC_ARTIFACT"
     CC_USER: "Super Odmen"
-    CC_ENV: $CC_ENV
+    CC_ENV: "$CC_ENV"
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
     strategy: depend
