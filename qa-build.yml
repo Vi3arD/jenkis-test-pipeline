@@ -30,6 +30,9 @@ stages:
 docker-build:
   image: docker:latest
   stage: docker-build
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKER_HOST: tcp://localhost:2376
   services:
     - docker:dind
   before_script:
