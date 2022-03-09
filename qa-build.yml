@@ -24,7 +24,7 @@ cli-step:
   stage: cli-step
   script:
     - |
-      echo 'hello admin'
+      echo 'hello admin!'
 
 
 docker-build:
