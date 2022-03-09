@@ -3,7 +3,7 @@ variables:
 
 stages:
 #   - gradle-build
-#   - cli-step
+  - cli-step
   - docker-build
   - docker-push
 
@@ -19,12 +19,12 @@ stages:
 #       - build/libs/*.jar
 
 
-# cli-step:
-#   image: nginx:latest
-#   stage: cli-step
-#   script:
-#     - |
-#       echo 'hello admin!'
+cli-step:
+  image: nginx:latest
+  stage: cli-step
+  script:
+    - |
+      echo 'hello admin!'
 
 
 docker-build:
@@ -39,7 +39,7 @@ docker-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_JOB_ID .
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_PIPELINE_ID .
 
 
 
@@ -51,7 +51,7 @@ docker-push:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker push  $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_JOB_ID
+    - docker push  $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_PIPELINE_ID
 
 
 
