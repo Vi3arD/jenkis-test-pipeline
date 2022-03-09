@@ -3,7 +3,7 @@ variables:
 
 stages:
 #   - gradle-build
-  - cli-step
+#   - cli-step
   - docker-build
   - docker-push
 
