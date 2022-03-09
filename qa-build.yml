@@ -28,7 +28,8 @@ stages:
 
 
 docker-build:
-  image: docker:19.03.13-dind
+#   image: docker:19.03.13-dind
+  image: docker:latest
   services:
     - docker:19.03.13-dind
   stage: docker-build
