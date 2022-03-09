@@ -19,12 +19,12 @@ stages:
 #       - build/libs/*.jar
 
 
-# cli-step:
-#   image: nginx:latest
-#   stage: cli-step
-#   script:
-#     - |
-#       echo 'hello admin'
+cli-step:
+  image: nginx:latest
+  stage: cli-step
+  script:
+    - |
+      echo 'hello admin'
 
 
 docker-build:
@@ -39,19 +39,19 @@ docker-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH .
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_JOB_ID .
 
 
 
 docker-push:
-  image: docker:latest
+  image: docker:19.03.13-dind
   stage: docker-push
   services:
-    - docker:dind
+    - docker:19.03.13-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker push  $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+    - docker push  $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH-$CI_JOB_ID
 
 
 
