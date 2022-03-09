@@ -33,9 +33,9 @@ docker-build:
   services:
     - docker:19.03.13-dind
   stage: docker-build
-  variables:
-    DOCKER_DRIVER: overlay2
-    DOCKER_HOST: tcp://host.docker.internal:2375
+#   variables:
+#     DOCKER_DRIVER: overlay2
+#     DOCKER_HOST: tcp://host.docker.internal:2375
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
