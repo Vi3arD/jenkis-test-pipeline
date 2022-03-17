@@ -12,6 +12,7 @@ cli-step-deploy:
   script:
     - |
       echo 'hello $CC_USER'
+      printenv
 
 cli-step-deploy-param:
   image: nginx:latest
