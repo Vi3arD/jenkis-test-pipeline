@@ -21,7 +21,6 @@ destroy-pipeline:
 deploy-pipeline:
   variables:
     PIPELINE_ID: $PIPELINE_ID
-    CC_ARTIFACT: $CC_ARTIFACT
     CC_USER: Super Odmen
     CC_ENV: $CC_ENV
   trigger:
