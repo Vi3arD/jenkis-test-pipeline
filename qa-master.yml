@@ -16,9 +16,10 @@ deploy-pipeline:
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
     strategy: depend
-  only:
-    variables:
-      - $PIPELINE_ID == "4"
+#   only:
+#     variables:
+#       - $PIPELINE_ID == "4"
   rules:
     - if: '$CI_PIPELINE_TRIGGERED == true'    
+    - if: $PIPELINE_ID == "4"
 
