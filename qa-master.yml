@@ -19,4 +19,5 @@ deploy-pipeline:
   only:
     variables:
       - $PIPELINE_ID == "4"
+      - $CI_PIPELINE_TRIGGERED == true
 
