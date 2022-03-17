@@ -1,0 +1,13 @@
+variables:
+  CC_ENV: $CC_ENV
+
+stages:
+  - cli-destroy-job
+
+cli-destroy-job:
+  image: nginx:latest
+  stage: cli-destroy-job
+  script:
+    - |
+      echo 'Env: $CC_ENV'
+
