@@ -1,11 +1,22 @@
 build-pipeline:
   variables:
+    AUTO_PIPELINE_ID: 1
   trigger:
-    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-build.yml"
+    include: "http://localhost:8080//rest/v1/pipeline/1/fhudshf8324y209r23p/pipeline.yml"
     strategy: depend
   except:
     variables:
     - $PIPELINE_ID
+
+destroy-pipeline:
+  variables:
+    PIPELINE_ID: $PIPELINE_ID
+    CC_ENV: $CC_ENV
+  trigger:
+    include: "http://localhost:8080//rest/v1/pipeline/3/fhudshf8324y209r23p/pipeline.yml"
+    strategy: depend
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $PIPELINE_ID == "3"'
 
 deploy-pipeline:
   variables:
@@ -14,15 +25,8 @@ deploy-pipeline:
     CC_USER: Super Odmen
     CC_ENV: $CC_ENV
   trigger:
-    include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
+    include: "http://localhost:8080//rest/v1/pipeline/2/fhudshf8324y209r23p/pipeline.yml"
     strategy: depend
-  # only:
-  #   variables:
-  #     - $CI_PIPELINE_SOURCE == "trigger"
-  #     - $PIPELINE_ID == "4"
-  # except:
-    # variables:
-      # - $CI_PIPELINE_SOURCE == "trigger"    
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "trigger" && $PIPELINE_ID == "4"'    
-    # - if: '$PIPELINE_ID == "4"'
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $PIPELINE_ID == "2"'
+
