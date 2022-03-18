@@ -19,6 +19,8 @@ destroy-pipeline:
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $PIPELINE_ID == "3"'
 
 deploy-pipeline:
+  inherit:
+    variables: true
   variables:
     PIPELINE_ID: $PIPELINE_ID
     CC_USER: Super Odmen
