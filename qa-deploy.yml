@@ -51,6 +51,6 @@ docker-push:
       - images.txt
   needs:
     - project: $CI_PROJECT_PATH
-      job: deploy-pipeline
+      job: build_vars
       ref: $CI_COMMIT_REF_NAME
       artifacts: true  
