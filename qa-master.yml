@@ -18,13 +18,13 @@ destroy-pipeline:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $PIPELINE_ID == "3"'
     
-build_vars:
-  stage: build
-  script:
-    - echo "PIPELINE_ID=$PIPELINE_ID CC_USER=Super__Odmen CC_ENV=$CC_ENV" > var.env
-  artifacts:
-    reports:
-      dotenv: var.env    
+# build_vars:
+#   stage: build
+#   script:
+#     - echo "PIPELINE_ID=$PIPELINE_ID CC_USER=Super__Odmen CC_ENV=$CC_ENV" > var.env
+#   artifacts:
+#     reports:
+#       dotenv: var.env    
 
 deploy-pipeline:
   inherit:
