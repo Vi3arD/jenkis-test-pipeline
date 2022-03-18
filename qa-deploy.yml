@@ -23,7 +23,7 @@ cli-step-deploy-param:
     - |
       echo 'Env: $CC_ENV'
       echo $CC_ENV
-      echo "$CC_ENV"
+      echo "------- $CC_ENV"
 
 docker-build:
   image: docker:19.03.13-dind
