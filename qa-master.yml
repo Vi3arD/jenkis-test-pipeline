@@ -29,11 +29,11 @@ destroy-pipeline:
 #       dotenv: var.env    
 
 deploy-pipeline:
-  inherit:
-    variables: true
+#   inherit:
+#     variables: true
   variables:
     PIPELINE_ID: $PIPELINE_ID
-    CC_USER: supod
+    CC_USER: supod_1
     CC_ENV: $CC_ENV
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
