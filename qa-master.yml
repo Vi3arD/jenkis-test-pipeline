@@ -21,7 +21,7 @@ destroy-pipeline:
 build_vars:
   stage: build
   script:
-    - printenv > var.env
+    - "PIPELINE_ID=$PIPELINE_ID CC_USER=Super Odmen CC_ENV=$CC_ENV" > var.env
   artifacts:
     reports:
       dotenv: var.env    
