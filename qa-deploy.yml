@@ -3,6 +3,8 @@ variables:
   CC_ENV: $CC_ENV
 
 stages:
+  - docker-build
+  - docker-push
   - cli-step-deploy
   - cli-step-deploy-param
 
