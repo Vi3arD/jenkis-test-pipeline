@@ -1,3 +1,6 @@
+variables:
+  CC_USER: kkkkhhhh
+
 build-pipeline:
   variables:
     AUTO_PIPELINE_ID: 1
