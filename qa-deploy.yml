@@ -37,22 +37,17 @@ docker-build:
     - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH .
 
 
-# docker-push:
-#   image: docker:19.03.13-dind
-#   stage: docker-push
-#   services:
-#     - docker:19.03.13-dind
-#   before_script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#   script:
-#     - docker push  $CI_REGISTRY_IMAGE:$CC_USER
-#     - docker push  $CI_REGISTRY_IMAGE:$CC_ENV
-#     - echo "$CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH " > images.txt
-#   artifacts:
-#     paths:
-#       - images.txt
-#   needs:
-#     - project: $CI_PROJECT_PATH
-#       job: build_vars
-#       ref: $CI_COMMIT_REF_NAME
-#       artifacts: true  
+docker-push:
+  image: docker:19.03.13-dind
+  stage: docker-push
+  services:
+    - docker:19.03.13-dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker push  $CI_REGISTRY_IMAGE:$CC_USER
+    - docker push  $CI_REGISTRY_IMAGE:$CC_ENV
+    - echo "$CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH " > images.txt
+  artifacts:
+    paths:
+      - images.txt
