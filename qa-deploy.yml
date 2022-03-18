@@ -35,7 +35,9 @@ docker-build:
   script:
     - echo "--$CC_ENV-"
     - echo "--$CC_USER-"
-    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH -t $CI_REGISTRY_IMAGE:$CC_ENV -t $CI_REGISTRY_IMAGE:$CC_USER .
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH $CI_REGISTRY_IMAGE:$CC_ENV
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH $CI_REGISTRY_IMAGE:$CC_USER
 
 
 docker-push:
