@@ -23,6 +23,11 @@ deploy-pipeline:
     PIPELINE_ID: $PIPELINE_ID
     CC_USER: Super Odmen
     CC_ENV: $CC_ENV
+  script: 
+    - printenv > var.env
+  artifacts:
+    reports:
+      dotenv: var.env  
   trigger:
     include: "https://raw.githubusercontent.com/Vi3arD/jenkis-test-pipeline/gitlab-pipe-1/qa-deploy.yml"
     strategy: depend
