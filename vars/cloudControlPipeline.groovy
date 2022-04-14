@@ -10,8 +10,6 @@ def call(String request) {
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure)
 
-    printenv
-
     def configurations = ActionConfigurations.getConfiguration(env[GlobalVars.JOB] as String)
     podTemplate(containers: Utils.getContainers(this, configurations),
             volumes: [emptyDirVolume(mountPath: '/shared')]
