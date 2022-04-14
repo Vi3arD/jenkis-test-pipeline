@@ -17,12 +17,10 @@ class Utils {
     static void toEnv(def script, def parameters) {
         parameters.each {
             entry ->
-                {
-                    if (GlobalVars.PARAMETERS == entry.key) {
-                        toEnv(script, entry.value)
-                    }
-                    script.env["${entry.key.toUpperCase()}"] = entry.value
+                if (GlobalVars.PARAMETERS == entry.key) {
+                    toEnv(script, entry.value)
                 }
+                script.env["${entry.key.toUpperCase()}"] = entry.value
         }
     }
 

@@ -10,6 +10,8 @@ def call(String request) {
     def structure = readJSON text: request, returnPojo: true
     Utils.toEnv(this, structure)
 
+    printenv
+
     def configurations = ActionConfigurations.getConfiguration(env[GlobalVars.JOB] as String)
     podTemplate(containers: Utils.getContainers(this, configurations),
             volumes: [emptyDirVolume(mountPath: '/shared')]
@@ -22,6 +24,7 @@ def call(String request) {
             if (GlobalVars.TRUE == env[GlobalVars.DIRECTION]) {
                 try {
                     for (currentStep = 0; currentStep < size; currentStep++) {
+                        echo "action ${configurations[currentStep]}"
                         Utils.make(this, configurations[currentStep])
                     }
                 } catch (Exception e) {
