@@ -2,41 +2,42 @@
 package vars
 
 import com.haulmont.cloudcontrol.Utils
-import com.haulmont.cloudcontrol.GlobalVars
 import com.haulmont.cloudcontrol.Notifier
+import com.haulmont.cloudcontrol.GlobalVars
+import com.haulmont.cloudcontrol.ActionConfigurations
 
 def call(String request) {
     def structure = readJSON text: request, returnPojo: true
-    env[GlobalVars.TYPE] = structure[GlobalVars.TYPE]
-    Utils.toEnv(this, structure[GlobalVars.ENV])
+    Utils.toEnv(this, structure)
 
-    podTemplate(containers: Utils.getContainers(this, structure[GlobalVars.ACTIONS]),
+    def configurations = ActionConfigurations.getConfiguration(env[GlobalVars.JOB] as String)
+    podTemplate(containers: Utils.getContainers(this, configurations),
             volumes: [emptyDirVolume(mountPath: '/shared')]
     ) {
         node(POD_LABEL) {
-            String flowStatus = "success"
             int currentStep
-            int size = structure[GlobalVars.ACTIONS].size()
+            int size = configurations.size()
+            String status = GlobalVars.SUCCESS
 
-            if (GlobalVars.CREATE.equals(structure[GlobalVars.TYPE])) {
-//                try {
+            if (GlobalVars.TRUE == env[GlobalVars.DIRECTION]) {
+                try {
                     for (currentStep = 0; currentStep < size; currentStep++) {
-                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep])
+                        Utils.make(this, configurations[currentStep])
                     }
-//                } catch (Exception e) {
+                } catch (Exception e) {
 //                    for (currentStep; currentStep >= 0; currentStep--) {
-//                        Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+//                        Utils.make(this, configurations[currentStep], true)
 //                    }
-//                    flowStatus = "failed"
-//                    echo "error -> ${e}"
-//                }
-            } else if (GlobalVars.DESTROY.equals(structure[GlobalVars.TYPE])) {
+                    status = GlobalVars.FAILED
+                    echo "error -> ${e}"
+                }
+            } else if (GlobalVars.FALSE == structure[GlobalVars.DIRECTION]) {
                 for (currentStep = 0; currentStep < size; currentStep++) {
-                    Utils.make(this, structure[GlobalVars.ACTIONS][currentStep], true)
+                    Utils.make(this, configurations[currentStep], true)
                 }
             }
 
-            Notifier.send(this, flowStatus)
+            Notifier.send(this, status)
         }
     }
 }

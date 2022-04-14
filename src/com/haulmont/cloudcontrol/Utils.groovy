@@ -10,9 +10,19 @@ class Utils {
         return cls.getDeclaredConstructor().newInstance()
     }
 
+    static boolean booleanFromString(String value) {
+        return GlobalVars.TRUE == value
+    }
+
     static void toEnv(def script, def parameters) {
         parameters.each {
-            entry -> script.env["${entry.key}"] = entry.value
+            entry ->
+                {
+                    if (GlobalVars.PARAMETERS == entry.key) {
+                        toEnv(script, entry.value)
+                    }
+                    script.env["${entry.key.toUpperCase()}"] = entry.value
+                }
         }
     }
 
@@ -29,8 +39,8 @@ class Utils {
         return result
     }
 
-    static void make(def script, def action, boolean isRollback = false) {
-        def executor = getActionInstanceByClassName(action[GlobalVars.EXECUTOR] as String)
+    static void make(def script, String action, boolean isRollback = false) {
+        def executor = getActionInstanceByClassName(action)
         script.container(executor.getContainerName()) {
             if (isRollback) {
                 executor.rollback(script)

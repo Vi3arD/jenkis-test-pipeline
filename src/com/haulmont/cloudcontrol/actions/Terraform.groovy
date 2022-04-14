@@ -11,10 +11,20 @@ class Terraform implements Action, Serializable {
     void action(def script) {
         script.dir("/shared/terraform") {
             script.sh("""
+                        export HTTP_PROXY=http://jmix:jmix@54.215.128.225:8888
+                        export HTTPS_PROXY=http://jmix:jmix@54.215.128.225:8888
+                        export NO_PROXY=10.5.44.21,10.5.44.21:32206
+            """)
+            script.sh("""
                         terraform init \
                             -backend-config="bucket=${script.env[GlobalVars.BUCKET_NAME]}" \
                             -reconfigure \
                             -input=false
+            """)
+            script.sh("""
+                        unset NO_PROXY
+                        unset HTTP_PROXY
+                        unset HTTPS_PROXY
             """)
             script.sh("""
                         terraform plan \
@@ -46,7 +56,7 @@ class Terraform implements Action, Serializable {
 
     @Override
     void rollback(def script) {
-        script.dir('/shared/terraform'){
+        script.dir('/shared/terraform') {
             script.sh("""
                     terraform init \
                     -backend-config="bucket=${script.env[GlobalVars.BUCKET_NAME]}" \
