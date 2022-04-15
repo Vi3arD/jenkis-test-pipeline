@@ -46,7 +46,7 @@ class Utils {
                 executor.action(script)
             }
         }
-        Notifier.send(this, "status", action[GlobalVars.NAME] as String)
+//        Notifier.send(this, "status", action[GlobalVars.NAME] as String)
     }
 
 }

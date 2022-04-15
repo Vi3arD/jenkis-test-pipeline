@@ -2,30 +2,10 @@ package com.haulmont.cloudcontrol
 
 class GlobalVars {
 
-    static String TYPE = "type"
-    static String ENV = "env"
-    static String ACTIONS = "actions"
-    static String NAME = "name"
-    static String EXECUTOR = "executor"
-
-    static String CREATE = "create"
-    static String DESTROY = "destroy"
-//
-//    static String INSTANCE_URL = "instanceUrl"
-//    static String REGISTRY_URL = "registryUrl"
-//
-//    static String GITLAB_REGISTRATION_TOKEN = "registrationToken"
-//    static String GITLAB_ROOT_PASSWORD = "rootPassword"
-//
-//    static String KEYCLOAK_URL = "url"
-//    static String KEYCLOAK_ADMIN_REALM = "adminRealm"
-//    static String KEYCLOAK_ADMIN_USERNAME = "adminUsername"
-//    static String KEYCLOAK_ADMIN_PASSWORD = "adminPassword"
-//    static String KEYCLOAK_ADMIN_CLIENT_ID = "adminClientId"
-//    static String KEYCLOAK_GITLAB_CLIENT_SECRET = "clientSecret"
 
     static String ID = "ID"
     static String JOB = "JOB"
+    static String NAME = "name"
     static String TRUE = "true"
     static String FALSE = "false"
     static String FAILED = "failed"
@@ -45,11 +25,17 @@ class GlobalVars {
     static String AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
 
     static String URL = "URL"
-    static String OPENSSH_KEY = "OPENSSH_KEY"
     static String VPC_ID = "VPC_ID"
     static String SUBNET_ID = "SUBNET_ID"
+    static String OPENSSH_KEY = "OPENSSH_KEY"
     static String INSTANCE_IP = "INSTANCE_IP"
     static String INSTANCE_ID = "INSTANCE_ID"
+    static String INSTANCE_URL = "INSTANCE_URL"
+    static String REGISTRY_URL = "REGISTRY_URL"
+    static String KEYCLOAK_URL = "KEYCLOAK_URL"
+    static String CLIENT_SECRET = "CLIENT_SECRET"
+    static String ADMIN_PASSWORD = "ADMIN_PASSWORD"
+    static String REGISTRATION_TOKEN = "REGISTRATION_TOKEN"
     static String GITLAB_ARCHITECTURE_TYPE = "GITLAB_ARCHITECTURE_TYPE"
 
 }

@@ -36,7 +36,7 @@ class Terraform implements Action, Serializable {
 
             def structure = script.readJSON text: script.env[GlobalVars.CLOUD_CONTROL_CONTEXT], returnPojo: true
 
-            structure[GlobalVars.PARAMETERS][GlobalVars.INSTANCE_IP.toLowerCase()] =
+            structure[GlobalVars.INSTANCE_IP.toLowerCase()] =
                     script.sh(
                             script: "terraform output -raw instanceIp",
                             returnStdout: true
