@@ -9,8 +9,6 @@ import com.haulmont.cloudcontrol.ActionConfigurations
 def call(String request) {
     env[GlobalVars.CLOUD_CONTROL_CONTEXT] = request
     def structure = readJSON text: request, returnPojo: true
-    env[GlobalVars.CLOUD_CONTROL_CONTEXT] = structure
-    echo "structure -> ${env[GlobalVars.CLOUD_CONTROL_CONTEXT]}"
     Utils.toEnv(this, structure)
 
     def configurations = ActionConfigurations.getConfiguration(env[GlobalVars.JOB] as String)
