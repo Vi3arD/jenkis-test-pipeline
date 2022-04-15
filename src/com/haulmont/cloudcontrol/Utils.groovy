@@ -24,11 +24,11 @@ class Utils {
         }
     }
 
-    static ArrayList getContainers(def script, def actions) {
+    static ArrayList getContainers(def script, ArrayList actions) {
         def result = []
         def containers = []
         for (int i = 0; i < actions.size(); i++) {
-            def executor = getActionInstanceByClassName(actions[i][GlobalVars.EXECUTOR] as String)
+            def executor = getActionInstanceByClassName(actions[i] as String)
             if (!containers.contains(executor.getContainerName())) {
                 result.add(script.containerTemplate(name: executor.getContainerName(), image: executor.getImage(), command: 'sleep', args: '99d'))
                 containers.add(executor.getContainerName())
