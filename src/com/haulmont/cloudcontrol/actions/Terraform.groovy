@@ -34,23 +34,39 @@ class Terraform implements Action, Serializable {
             """)
             script.sh("terraform apply -auto-approve -input=false terraform.tfplan")
 
-            script.env[GlobalVars.INSTANCE_IP] = script.sh(
-                    script: "terraform output -raw instanceIp",
-                    returnStdout: true
-            ).trim()
+            def structure = readJSON text: script.env[GlobalVars.CLOUD_CONTROL_CONTEXT], returnPojo: true
 
-            //for test
-            script.env[GlobalVars.INSTANCE_URL] = script.sh(
-                    script: "terraform output -raw instanceUrl",
-                    returnStdout: true
-            ).trim()
+            structure[GlobalVars.PARAMETERS][GlobalVars.INSTANCE_IP.toLowerCase()] =
+                    script.sh(
+                            script: "terraform output -raw instanceIp",
+                            returnStdout: true
+                    ).trim()
 
-            script.env[GlobalVars.INSTANCE_ID] = script.sh(
-                    script: "terraform output -raw instanceId",
-                    returnStdout: true
-            ).trim()
+            structure[GlobalVars.PARAMETERS][GlobalVars.INSTANCE_ID.toLowerCase()] =
+                    script.sh(
+                            script: "terraform output -raw instanceId",
+                            returnStdout: true
+                    ).trim()
 
-            script.sh 'terraform output -raw opensshKey > ../ansible/key.pem'
+            structure[GlobalVars.PARAMETERS][GlobalVars.SUBNET_ID.toLowerCase()] =
+                    script.sh(
+                            script: "terraform output -raw subnetId",
+                            returnStdout: true
+                    ).trim()
+
+            structure[GlobalVars.PARAMETERS][GlobalVars.VPC_ID.toLowerCase()] =
+                    script.sh(
+                            script: "terraform output -raw vpcId",
+                            returnStdout: true
+                    ).trim()
+
+            structure[GlobalVars.OPENSSH_KEY.toLowerCase()] =
+                    script.sh(
+                            script: "terraform output -raw opensshKey",
+                            returnStdout: true
+                    ).trim()
+
+            script.env[GlobalVars.CLOUD_CONTROL_CONTEXT] = structure
         }
     }
 

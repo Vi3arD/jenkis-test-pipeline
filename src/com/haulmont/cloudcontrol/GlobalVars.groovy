@@ -37,6 +37,7 @@ class GlobalVars {
     static String CALLBACK_URL = "CALLBACK_URL"
 //    static String SKIP_COMPENSATE = "SKIP_COMPENSATE"
     static String DEPLOYMENT_TYPE = "DEPLOYMENT_TYPE"
+    static String CLOUD_CONTROL_CONTEXT = "CLOUD_CONTROL_CONTEXT"
     static String CLOUD_CONTROL_M2M_TOKEN = "CLOUD_CONTROL_M2M_TOKEN"
 
     static String AWS_REGION = "AWS_REGION"
@@ -44,6 +45,7 @@ class GlobalVars {
     static String AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
 
     static String URL = "URL"
+    static String OPENSSH_KEY = "OPENSSH_KEY"
     static String VPC_ID = "VPC_ID"
     static String SUBNET_ID = "SUBNET_ID"
     static String INSTANCE_IP = "INSTANCE_IP"
