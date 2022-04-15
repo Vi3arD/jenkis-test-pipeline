@@ -34,7 +34,7 @@ class Terraform implements Action, Serializable {
             """)
             script.sh("terraform apply -auto-approve -input=false terraform.tfplan")
 
-            def structure = readJSON text: script.env[GlobalVars.CLOUD_CONTROL_CONTEXT], returnPojo: true
+            def structure = script.readJSON text: script.env[GlobalVars.CLOUD_CONTROL_CONTEXT], returnPojo: true
 
             structure[GlobalVars.PARAMETERS][GlobalVars.INSTANCE_IP.toLowerCase()] =
                     script.sh(
