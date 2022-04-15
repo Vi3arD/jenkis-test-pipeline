@@ -8,7 +8,7 @@ class Notifier {
 
         def structure = script.readJSON text: script.env[GlobalVars.CLOUD_CONTROL_CONTEXT], returnPojo: true
         structure[GlobalVars.PARAMETERS][GlobalVars.INSTANCE_ID.toLowerCase()] = "77.7.7.7.7.7.7.7.4"
-        echo "structure -> ${structure}"
+        script.echo "structure -> ${structure}"
 
         def response = script.httpRequest consoleLogResponseBody: true,
                 httpMode: 'GET',
